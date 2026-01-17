@@ -38,10 +38,38 @@
         .btn-primary:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(6, 182, 212, 0.5); }
         .btn-secondary { padding: 1rem 3rem; background: transparent; border: 3px solid #a855f7; border-radius: 50px; font-weight: 700; font-size: 1.1rem; color: white; cursor: pointer; transition: all 0.4s; text-decoration: none; display: inline-block; }
         .btn-secondary:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(168, 85, 247, 0.4); }
-        .about-container, .contact-container { max-width: 75rem; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(20px); border-radius: 2rem; padding: 4rem; border: 2px solid rgba(6, 182, 212, 0.4); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); }
+        .about-container, .contact-container, .projects-container, .skills-container { max-width: 75rem; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(20px); border-radius: 2rem; padding: 4rem; border: 2px solid rgba(6, 182, 212, 0.4); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); }
         .section-title { font-size: 4rem; font-weight: 900; text-align: center; margin-bottom: 4rem; background: linear-gradient(135deg, #22d3ee, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .about-container p { font-size: 1.2rem; color: #d1d5db; line-height: 2; margin-bottom: 1.5rem; }
-        @media (max-width: 768px) { .hero h1 { font-size: 3rem; } .profile-photo { width: 180px; height: 180px; } }
+        
+        .project-card { background: rgba(15, 15, 30, 0.7); border-radius: 1.5rem; padding: 2.5rem; margin-bottom: 2.5rem; border: 2px solid rgba(34, 211, 238, 0.3); transition: all 0.4s; cursor: pointer; }
+        .project-card:hover { transform: translateY(-10px); border-color: rgba(168, 85, 247, 0.6); box-shadow: 0 20px 50px rgba(168, 85, 247, 0.3); }
+        .project-title { font-size: 2rem; font-weight: 700; color: #22d3ee; margin-bottom: 0.5rem; }
+        .project-meta { font-size: 1rem; color: #9ca3af; margin-bottom: 1rem; font-style: italic; }
+        .project-description { font-size: 1.1rem; color: #d1d5db; line-height: 1.8; margin-bottom: 1rem; }
+        .project-tech { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.5rem; }
+        .tech-tag { background: linear-gradient(135deg, #1e3a8a, #7c3aed); padding: 0.5rem 1.2rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600; }
+        
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .skill-category { background: rgba(15, 15, 30, 0.7); border-radius: 1.5rem; padding: 2rem; border: 2px solid rgba(34, 211, 238, 0.3); }
+        .skill-category h3 { font-size: 1.8rem; color: #a855f7; margin-bottom: 1.5rem; font-weight: 700; }
+        .skill-item { background: rgba(6, 182, 212, 0.1); padding: 0.8rem 1.2rem; border-radius: 10px; margin-bottom: 0.8rem; font-size: 1.1rem; color: #d1d5db; border-left: 4px solid #22d3ee; }
+        
+        .education-item { background: rgba(15, 15, 30, 0.7); border-radius: 1.5rem; padding: 2rem; margin-bottom: 2rem; border: 2px solid rgba(168, 85, 247, 0.3); }
+        .education-title { font-size: 1.8rem; color: #a855f7; font-weight: 700; margin-bottom: 0.5rem; }
+        .education-meta { font-size: 1.1rem; color: #9ca3af; margin-bottom: 0.8rem; }
+        .education-details { font-size: 1.1rem; color: #d1d5db; line-height: 1.8; }
+        
+        .contact-info { font-size: 1.3rem; color: #d1d5db; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+        .contact-info span { font-size: 2rem; }
+        
+        @media (max-width: 768px) { 
+            .hero h1 { font-size: 3rem; } 
+            .profile-photo { width: 180px; height: 180px; }
+            .nav-links { gap: 1rem; }
+            .nav-links button { font-size: 0.8rem; }
+            .section-title { font-size: 2.5rem; }
+        }
     </style>
 </head>
 <body>
@@ -68,7 +96,7 @@
             <h1>Avishka Vikum</h1>
             <p class="tagline">Software Engineering Intern</p>
             <p class="subtitle">Full Stack Developer | AI Enthusiast | Mobile App Developer</p>
-            <p class="description">Passionate full-stack developer specializing in cutting-edge web and mobile solutions. Expert in MERN stack, React Native, AI integration, and Spring Boot.</p>
+            <p class="description">Results-driven Software Engineering undergraduate at SLIIT with proven expertise in full-stack development using the MERN stack, AI API integration, and Agile methodologies. Proficient in leveraging project management platforms including Jira, ClickUp, and Confluence to deliver high-quality solutions. Committed to creating innovative, user-centric web and mobile applications that solve real-world problems.</p>
             <div class="hero-buttons">
                 <a href="https://github.com/Avishka137" target="_blank" class="btn-primary">🚀 View GitHub</a>
                 <a href="https://www.linkedin.com/in/avishka-vikum-5475b9277" target="_blank" class="btn-secondary">💼 LinkedIn Profile</a>
@@ -79,35 +107,259 @@
     <section id="about">
         <div class="about-container">
             <h2 class="section-title">About Me</h2>
-            <p>Results-driven Software Engineering undergraduate at SLIIT with proven expertise in full-stack development using the MERN stack, AI API integration, and Agile methodologies.</p>
+            <p>Results-driven Software Engineering undergraduate at SLIIT with proven expertise in full-stack development using the MERN stack, AI API integration, and Agile methodologies. Proficient in leveraging project management platforms including Jira, ClickUp, and Confluence to deliver high-quality solutions. Committed to creating innovative, user-centric web and mobile applications that solve real-world problems. Seeking a Software Engineering Internship to apply technical skills, drive impactful projects, and accelerate professional growth in a dynamic, collaborative environment.</p>
+            
+            <h3 style="font-size: 2.5rem; color: #a855f7; margin-top: 3rem; margin-bottom: 2rem;">Education</h3>
+            
+            <div class="education-item">
+                <div class="education-title">BSc (Hons) in Information Technology</div>
+                <div class="education-meta">Sri Lanka Institute of Information Technology (SLIIT), Malabe | 2023 - PRESENT</div>
+                <div class="education-details">Specializing in Software Engineering</div>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-title">Certified in Advanced OOP Analysis</div>
+                <div class="education-meta">10Pearls University, Pakistan | 2024</div>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-title">Certified in Python Programming</div>
+                <div class="education-meta">University of Moratuwa & CISCO Networking Academy | 2024</div>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-title">Certified in Web Designing</div>
+                <div class="education-meta">University of Moratuwa | 2024</div>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-title">G.C.E. Advanced Level</div>
+                <div class="education-meta">Sri Subhuthi National School, Baththaramulle | 2021</div>
+                <div class="education-details">ICT - B | SFT - C | ET - C | Z-Score: 1.0948</div>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-title">G.C.E. Ordinary Level</div>
+                <div class="education-meta">M.D.H. Jayawardena School, Koswatte | 2018</div>
+            </div>
         </div>
     </section>
 
     <section id="projects">
-        <div class="about-container">
+        <div class="projects-container">
             <h2 class="section-title">Projects</h2>
-            <p>My featured projects showcase expertise in MERN stack, React Native, and AI integration.</p>
+            
+            <div class="project-card">
+                <div class="project-title">Charity Management System – Web Application</div>
+                <div class="project-meta">Jul 2025 – Oct 2025 | Team Project (5 Members – Agile)</div>
+                <div class="project-description">
+                    A MERN stack-based donation platform connecting donors and beneficiaries for transparent charitable activities.
+                    <br><br>
+                    <strong>My Contribution:</strong> Developed a workshop management module enabling donors to participate in handcraft learning sessions. Implemented scheduling, registration, and material tracking features using React.js and Node.js, collaborating through Agile sprints for seamless integration.
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">MongoDB</span>
+                    <span class="tech-tag">Express.js</span>
+                    <span class="tech-tag">React.js</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">Tailwind CSS</span>
+                    <span class="tech-tag">JWT</span>
+                    <span class="tech-tag">Stripe</span>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-title">Charity Management System – Mobile Application</div>
+                <div class="project-meta">Jul 2025 – Oct 2025 | Team Project</div>
+                <div class="project-description">
+                    React Native version of the charity platform enabling users to donate and access support on the go.
+                    <br><br>
+                    <strong>My Contribution:</strong> Developed a workshop module for donors to learn handcraft skills, implementing scheduling and registration features using React Native and Expo.
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">React Native</span>
+                    <span class="tech-tag">Expo</span>
+                    <span class="tech-tag">NativeWind</span>
+                    <span class="tech-tag">Appwrite</span>
+                    <span class="tech-tag">Gemini API</span>
+                    <span class="tech-tag">Stripe</span>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-title">Healthcare Management System</div>
+                <div class="project-meta">Jul 2025 – Oct 2025 | Team Project</div>
+                <div class="project-description">
+                    A centralized healthcare platform connecting patients and doctors for online consultations.
+                    <br><br>
+                    <strong>My Contribution:</strong> Built an AI report generation feature using Gemini API to analyze patient data and provide personalized healthcare recommendations.
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">MERN Stack</span>
+                    <span class="tech-tag">Stripe</span>
+                    <span class="tech-tag">Gemini API</span>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-title">Fish Haven – Ornamental Fish Farm Management System</div>
+                <div class="project-meta">Jun 2025 – Aug 2025 | Team Project</div>
+                <div class="project-description">
+                    A management system for export operations, delivery, employee, and inventory handling.
+                    <br><br>
+                    <strong>My Contribution:</strong> Developed the Employee Management module with automated salary generation, attendance tracking, and payroll processing features.
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">MERN Stack</span>
+                    <span class="tech-tag">JWT Authentication</span>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-title">AI Powered HR-Chatbot</div>
+                <div class="project-meta">Nov 2025 – Dec 2025 | Personal Project</div>
+                <div class="project-description">
+                    An intelligent chatbot providing instant recruitment and hiring support using natural language processing, helping candidates and employees with job applications, interview processes, and company policies.
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">CSS</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Google Gemini AI API</span>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-title">KIVY-CHAT-APPLICATION</div>
+                <div class="project-meta">Dec 2025 | Personal Project</div>
+                <div class="project-description">
+                    A desktop chat application with user authentication, real-time messaging, and profile management built using Python and Kivy framework.
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Kivy</span>
+                    <span class="tech-tag">SQLite3</span>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="skills">
-        <div class="about-container">
-            <h2 class="section-title">Skills</h2>
-            <p>Technical skills: React.js, Node.js, MongoDB, Express.js, React Native, Spring Boot, AI APIs, and more.</p>
+        <div class="skills-container">
+            <h2 class="section-title">Skills & Technologies</h2>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <div class="skill-item">C Language</div>
+                    <div class="skill-item">C++ Language</div>
+                    <div class="skill-item">JavaScript</div>
+                    <div class="skill-item">Python</div>
+                    <div class="skill-item">Java</div>
+                    <div class="skill-item">HTML</div>
+                    <div class="skill-item">CSS</div>
+                    <div class="skill-item">PHP</div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Frameworks & Libraries</h3>
+                    <div class="skill-item">MERN Stack (MongoDB, Express.js, React.js, Node.js)</div>
+                    <div class="skill-item">React Native</div>
+                    <div class="skill-item">Spring Boot</div>
+                    <div class="skill-item">Tailwind CSS</div>
+                    <div class="skill-item">NativeWind</div>
+                    <div class="skill-item">Expo</div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Databases</h3>
+                    <div class="skill-item">MongoDB</div>
+                    <div class="skill-item">MySQL</div>
+                    <div class="skill-item">ORDB SQL</div>
+                    <div class="skill-item">SQLite3</div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Tools & Platforms</h3>
+                    <div class="skill-item">GitHub</div>
+                    <div class="skill-item">Jira</div>
+                    <div class="skill-item">Postman</div>
+                    <div class="skill-item">Appwrite</div>
+                    <div class="skill-item">ClickUp</div>
+                    <div class="skill-item">Confluence</div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Soft Skills</h3>
+                    <div class="skill-item">Team Collaboration & Communication</div>
+                    <div class="skill-item">Problem Solving & Critical Thinking</div>
+                    <div class="skill-item">Time Management & Task Prioritization</div>
+                    <div class="skill-item">Agile Methodologies</div>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="contact">
         <div class="contact-container">
             <h2 class="section-title">Contact Me</h2>
-            <p>📧 Email: avishkavikum731@gmail.com</p>
-            <p>📱 Phone: 071 3300 659 / 078 2641 375</p>
-            <p>📍 Location: Koswatte, Colombo, Sri Lanka</p>
+            <div class="contact-info">
+                <span>📧</span>
+                <div>
+                    <strong>Email:</strong><br>
+                    <a href="mailto:avishkavikum731@gmail.com" style="color: #22d3ee; text-decoration: none;">avishkavikum731@gmail.com</a>
+                </div>
+            </div>
+            <div class="contact-info">
+                <span>📱</span>
+                <div>
+                    <strong>Phone:</strong><br>
+                    071 3300 659 / 078 2641 375
+                </div>
+            </div>
+            <div class="contact-info">
+                <span>📍</span>
+                <div>
+                    <strong>Location:</strong><br>
+                    245/2, Thalangama North, Koswatte, Pipe Rd, 2nd Lane, Colombo, Sri Lanka
+                </div>
+            </div>
+            <div class="contact-info">
+                <span>💼</span>
+                <div>
+                    <strong>LinkedIn:</strong><br>
+                    <a href="https://www.linkedin.com/in/avishka-vikum-5475b9277" target="_blank" style="color: #22d3ee; text-decoration: none;">linkedin.com/in/avishka-vikum</a>
+                </div>
+            </div>
+            <div class="contact-info">
+                <span>🚀</span>
+                <div>
+                    <strong>GitHub:</strong><br>
+                    <a href="https://github.com/Avishka137" target="_blank" style="color: #22d3ee; text-decoration: none;">github.com/Avishka137</a>
+                </div>
+            </div>
+            
+            <h3 style="font-size: 2rem; color: #a855f7; margin-top: 3rem; margin-bottom: 1.5rem;">References</h3>
+            <div class="education-item">
+                <div class="education-title">Mr. Janith Udara Herath</div>
+                <div class="education-details" style="margin-top: 1rem;">
+                    Senior DevOps Engineer, Insighture<br>
+                    📞 +94 61 895 0333<br>
+                    📧 janithherath94@gmail.com
+                </div>
+            </div>
+            <div class="education-item">
+                <div class="education-title">Mr. Kanishka Madhuranga</div>
+                <div class="education-details" style="margin-top: 1rem;">
+                    Senior Software Engineer, TIQRI<br>
+                    📞 +94 76 803 6385<br>
+                    📧 wkm@tiqri.com
+                </div>
+            </div>
         </div>
     </section>
 
     <script>
-        // THIS IS THE MISSING FUNCTION!
         function showSection(sectionId) {
             document.querySelectorAll('section').forEach(section => {
                 section.classList.remove('active');
@@ -156,4 +408,3 @@
     </script>
 </body>
 </html>
-
