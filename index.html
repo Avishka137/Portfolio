@@ -47,65 +47,295 @@
 <body>
     <div id="canvas-container"></div>
     <nav>
-        <div class="nav-container">
-            <div class="logo">AV</div>
-            <div class="nav-links">
-                <button onclick="showSection('home')" class="active" data-section="home">Home</button>
-                <button onclick="showSection('about')" data-section="about">About</button>
-                <button onclick="showSection('projects')" data-section="projects">Projects</button>
-                <button onclick="showSection('skills')" data-section="skills">Skills</button>
-                <button onclick="showSection('contact')" data-section="contact">Contact</button>
-            </div>
-        </div>
-    </nav>
-
+       
+ <!-- Home Section -->
     <section id="home" class="active">
         <div class="hero">
-            <div class="profile-photo-container">
-                <div class="photo-ring"></div>
-                <img src="av.jpeg" alt="Avishka Vikum" class="profile-photo">
-            </div>
             <h1>Avishka Vikum</h1>
             <p class="tagline">Software Engineering Intern</p>
             <p class="subtitle">MERN Stack Developer | AI Enthusiast | Mobile App Developer</p>
-            <p class="description">Passionate full-stack developer specializing in cutting-edge web and mobile solutions. Expert in MERN stack, React Native, AI integration, and Spring Boot.</p>
+            <p class="description">
+                Passionate full-stack developer specializing in cutting-edge web and mobile solutions. 
+                Expert in MERN stack, React Native, AI integration, and Spring Boot. 
+                Transforming innovative ideas into powerful, user-centric applications.
+            </p>
             <div class="hero-buttons">
                 <a href="https://github.com/Avishka137" target="_blank" class="btn-primary">🚀 View GitHub</a>
-                <a href="https://www.linkedin.com/in/avishka-vikum-5475b9277" target="_blank" class="btn-secondary">💼 LinkedIn Profile</a>
+                <a href="https://www.linkedin.com/in/avishka-vikum-5475b9277?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="btn-secondary">💼 LinkedIn Profile</a>
             </div>
         </div>
     </section>
 
+    <!-- About Section -->
     <section id="about">
         <div class="about-container">
-            <h2 class="section-title">About Me</h2>
-            <p>Results-driven Software Engineering undergraduate at SLIIT with proven expertise in full-stack development using the MERN stack, AI API integration, and Agile methodologies.</p>
+            <h2>About Me</h2>
+            <p>
+                Results-driven Software Engineering undergraduate at SLIIT with proven expertise in full-stack 
+                development using the MERN stack, AI API integration, and Agile methodologies. Proficient in 
+                leveraging project management platforms including Jira, ClickUp, and Confluence to deliver 
+                high-quality solutions.
+            </p>
+            <p>
+                Committed to creating innovative, user-centric web and mobile applications that solve real-world 
+                problems. Seeking a Software Engineering Internship to apply technical skills, drive impactful 
+                projects, and accelerate professional growth in a dynamic, collaborative environment.
+            </p>
+
+            <div class="education-section">
+                <h3 class="education-title">🎓 Education & Certifications</h3>
+                <div class="education-grid">
+                    <div class="education-card degree">
+                        <h3>BSc (Hons) Information Technology</h3>
+                        <p>Specializing in Software Engineering</p>
+                        <p class="institution">Sri Lanka Institute of Information Technology (SLIIT), Malabe</p>
+                        <p class="year">2023 - Present</p>
+                    </div>
+
+                    <div class="education-card cert">
+                        <h3>Advanced OOP Analysis</h3>
+                        <p>Certified by 10Pearls University, Pakistan</p>
+                        <p class="year">2024</p>
+                    </div>
+
+                    <div class="education-card cert">
+                        <h3>Python Programming</h3>
+                        <p>University of Moratuwa & CISCO Networking Academy</p>
+                        <p class="year">2024</p>
+                    </div>
+
+                    <div class="education-card cert">
+                        <h3>Web Designing</h3>
+                        <p>Certified by University of Moratuwa</p>
+                        <p class="year">2024</p>
+                    </div>
+
+                    <div class="education-card school">
+                        <h3>G.C.E. Advanced Level</h3>
+                        <p>ICT - B | SFT - C | ET - C</p>
+                        <p>Z-Score: 1.0948</p>
+                        <p class="institution">Sri Subhuthi National School, Baththaramulla</p>
+                        <p class="year">2021</p>
+                    </div>
+
+                    <div class="education-card school">
+                        <h3>G.C.E. Ordinary Level</h3>
+                        <p class="institution">M.D.H. Jayawardena School, Koswatte</p>
+                        <p class="year">2018</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- Projects Section -->
     <section id="projects">
-        <div class="about-container">
-            <h2 class="section-title">Projects</h2>
-            <p>My featured projects showcase expertise in MERN stack, React Native, and AI integration.</p>
+        <div class="projects-container">
+            <h2 class="section-title">🚀 Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Charity Management System</h3>
+                        <span class="project-period">Jul - Oct 2025</span>
+                    </div>
+                    <p class="project-type">💻 Web Application</p>
+                    <p class="project-desc">
+                        A comprehensive MERN stack-based donation platform connecting donors and beneficiaries for transparent charitable activities. Developed a workshop management module enabling donors to participate in handcraft learning sessions with scheduling, registration, and material tracking features.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">Express.js</span>
+                        <span class="tech-tag">React.js</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Tailwind CSS</span>
+                        <span class="tech-tag">JWT</span>
+                        <span class="tech-tag">Stripe</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Charity Management - Mobile App</h3>
+                        <span class="project-period">Jul - Oct 2025</span>
+                    </div>
+                    <p class="project-type">📱 Mobile Application</p>
+                    <p class="project-desc">
+                        React Native version of the charity platform enabling users to donate and access support on the go. Developed workshop module for donors to learn handcraft skills with full scheduling and registration capabilities.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">React Native</span>
+                        <span class="tech-tag">Expo</span>
+                        <span class="tech-tag">NativeWind</span>
+                        <span class="tech-tag">Appwrite</span>
+                        <span class="tech-tag">Gemini API</span>
+                        <span class="tech-tag">Stripe</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Healthcare Management System</h3>
+                        <span class="project-period">Jul - Oct 2025</span>
+                    </div>
+                    <p class="project-type">🏥 Web Application</p>
+                    <p class="project-desc">
+                        A centralized healthcare platform connecting patients and doctors for online consultations. Built an AI report generation feature using Gemini API to analyze patient data and provide personalized healthcare recommendations.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">MERN Stack</span>
+                        <span class="tech-tag">Gemini AI</span>
+                        <span class="tech-tag">Stripe</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Fish Haven</h3>
+                        <span class="project-period">Jun - Aug 2025</span>
+                    </div>
+                    <p class="project-type">🐟 Management System</p>
+                    <p class="project-desc">
+                        Ornamental Fish Farm Management System for export operations, delivery, employee, and inventory handling. Developed comprehensive Employee Management module with automated salary generation, attendance tracking, and payroll processing.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">MERN Stack</span>
+                        <span class="tech-tag">JWT</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>AI-Powered HR Chatbot</h3>
+                        <span class="project-period">Nov - Dec 2025</span>
+                    </div>
+                    <p class="project-type">🤖 Personal Project</p>
+                    <p class="project-desc">
+                        An intelligent chatbot providing instant recruitment and hiring support using natural language processing. Helps candidates and employees with job applications, interview processes, and company policies.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Gemini AI API</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>KIVY Chat Application</h3>
+                        <span class="project-period">Dec 2025</span>
+                    </div>
+                    <p class="project-type">💬 Desktop Application</p>
+                    <p class="project-desc">
+                        A desktop chat application with user authentication, real-time messaging, and profile management built using Python and Kivy framework.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Kivy</span>
+                        <span class="tech-tag">SQLite3</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- Skills Section -->
     <section id="skills">
-        <div class="about-container">
-            <h2 class="section-title">Skills</h2>
-            <p>Technical skills: React.js, Node.js, MongoDB, Express.js, React Native, Spring Boot, AI APIs, and more.</p>
+        <div class="projects-container">
+            <h2 class="section-title">⚡ Technical Arsenal</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>🎨 Frontend Development</h3>
+                    <div class="skill-item"><div class="skill-dot"></div><span>React.js</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>React Native</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>HTML5 & CSS3</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>Tailwind CSS</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>JavaScript (ES6+)</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <h3>⚙️ Backend Development</h3>
+                    <div class="skill-item"><div class="skill-dot"></div><span>Node.js</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>Express.js</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>Spring Boot</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>PHP</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <h3>🗄️ Databases</h3>
+                    <div class="skill-item"><div class="skill-dot"></div><span>MongoDB</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>MySQL</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>Appwrite</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>SQLite</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>ORDB SQL</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <h3>💻 Programming Languages</h3>
+                    <div class="skill-item"><div class="skill-dot"></div><span>JavaScript</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>Java</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>Python</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>C++</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>C</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <h3>🛠️ Tools & Platforms</h3>
+                    <div class="skill-item"><div class="skill-dot"></div><span>GitHub</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>Jira</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>Postman</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>ClickUp</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>Confluence</span></div>
+                </div>
+
+                <div class="skill-card">
+                    <h3>🎯 Soft Skills</h3>
+                    <div class="skill-item"><div class="skill-dot"></div><span>Team Collaboration</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>Problem Solving</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>Critical Thinking</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>Time Management</span></div>
+                    <div class="skill-item"><div class="skill-dot"></div><span>Agile Methodology</span></div>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- Contact Section -->
     <section id="contact">
         <div class="contact-container">
-            <h2 class="section-title">Contact Me</h2>
-            <p>📧 Email: avishkavikum731@gmail.com</p>
-            <p>📱 Phone: 071 3300 659 / 078 2641 375</p>
-            <p>📍 Location: Koswatte, Colombo, Sri Lanka</p>
+            <h2 class="section-title">📬 Get In Touch</h2>
+            <div class="contact-info">
+                <div class="contact-item email">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-details">
+                        <p>Email</p>
+                        <p><a href="mailto:avishkavikum731@gmail.com">avishkavikum731@gmail.com</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-item phone">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-details">
+                        <p>Phone</p>
+                        <p>071 3300 659 / 078 2641 375</p>
+                    </div>
+                </div>
+
+                <div class="contact-item location">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-details">
+                        <p>Location</p>
+                        <p>245/2, Thalangama North, Koswatte, Colombo, Sri Lanka</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="social-links">
+                <a href="https://github.com/Avishka137" target="_blank" class="social-btn github" title="GitHub">🔗</a>
+                <a href="https://linkedin.com/in/avishka-vikum" target="_blank" class="social-btn linkedin" title="LinkedIn">💼</a>
+            </div>
         </div>
     </section>
-
     <script>
         // THIS IS THE MISSING FUNCTION!
         function showSection(sectionId) {
@@ -156,3 +386,4 @@
     </script>
 </body>
 </html>
+
