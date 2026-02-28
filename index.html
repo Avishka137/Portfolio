@@ -25,12 +25,11 @@
             background: var(--bg);
             color: var(--text);
             overflow-x: hidden;
-            cursor: none;
         }
 
         /* Custom Cursor */
-        .cursor { position: fixed; width: 10px; height: 10px; background: var(--cyan); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform 0.1s, background 0.3s; box-shadow: 0 0 8px var(--cyan); }
-        .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1.5px solid rgba(0,245,255,0.6); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: all 0.15s ease-out; }
+        .cursor { position: fixed; width: 14px; height: 14px; background: var(--cyan); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform 0.15s, width 0.2s, height 0.2s; box-shadow: 0 0 12px var(--cyan), 0 0 25px rgba(0,245,255,0.4); }
+        .cursor-ring { position: fixed; width: 40px; height: 40px; border: 2px solid rgba(0,245,255,0.7); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: all 0.12s ease-out; }
 
         /* Canvas */
         #canvas-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
@@ -81,6 +80,7 @@
         /* SECTIONS */
         section { min-height: 100vh; display: none; align-items: center; justify-content: center; padding: 7rem 2rem 4rem; }
         section.active { display: flex; animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) both; }
+        #home { display: flex; }
         @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
 
         /* HERO */
@@ -307,7 +307,6 @@
             .about-container, .contact-container, .projects-container, .skills-container { padding: 2rem 1.5rem; }
             .nav-links { gap: 0.2rem; }
             .nav-links button { font-size: 0.72rem; padding: 0.4rem 0.6rem; }
-            body { cursor: auto; }
             .cursor, .cursor-ring { display: none; }
         }
     </style>
@@ -682,29 +681,49 @@
     </section>
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Custom cursor
+        // Custom cursor (decorative overlay — doesn't hide real cursor)
         const cursor = document.getElementById('cursor');
         const ring = document.getElementById('cursorRing');
         let mx = 0, my = 0, rx = 0, ry = 0;
-        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
-        function animRing() { rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(animRing); }
+        document.addEventListener('mousemove', e => {
+            mx = e.clientX; my = e.clientY;
+            cursor.style.left = mx+'px'; cursor.style.top = my+'px';
+        });
+        function animRing() {
+            rx += (mx-rx)*0.12; ry += (my-ry)*0.12;
+            ring.style.left = rx+'px'; ring.style.top = ry+'px';
+            requestAnimationFrame(animRing);
+        }
         animRing();
-        document.querySelectorAll('a,button,.project-card,.contact-card').forEach(el => {
-            el.addEventListener('mouseenter', () => { cursor.style.transform='translate(-50%,-50%) scale(1.8)'; ring.style.transform='translate(-50%,-50%) scale(1.4)'; });
-            el.addEventListener('mouseleave', () => { cursor.style.transform='translate(-50%,-50%) scale(1)'; ring.style.transform='translate(-50%,-50%) scale(1)'; });
+        document.querySelectorAll('a, button, .project-card, .contact-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.width='20px'; cursor.style.height='20px';
+                ring.style.width='55px'; ring.style.height='55px';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.width='14px'; cursor.style.height='14px';
+                ring.style.width='40px'; ring.style.height='40px';
+            });
         });
 
         // Navigation
         function showSection(id) {
-            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            document.querySelector(`[data-section="${id}"]`).classList.add('active');
+            document.querySelectorAll('section').forEach(function(s) {
+                s.style.display = 'none';
+                s.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-links button').forEach(function(b) {
+                b.classList.remove('active');
+            });
+            var target = document.getElementById(id);
+            target.style.display = 'flex';
+            target.classList.add('active');
+            document.querySelector('[data-section="' + id + '"]').classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        document.querySelectorAll('.nav-links button').forEach(btn => {
-            btn.addEventListener('click', () => showSection(btn.dataset.section));
+        document.querySelectorAll('.nav-links button').forEach(function(btn) {
+            btn.onclick = function() { showSection(btn.getAttribute('data-section')); };
         });
 
         // Three.js Background
