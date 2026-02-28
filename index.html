@@ -4,79 +4,322 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avishka Vikum - Software Engineer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
+        :root {
+            --cyan: #00f5ff;
+            --purple: #bf5af2;
+            --pink: #ff2d78;
+            --gold: #ffd60a;
+            --bg: #04040f;
+            --card: rgba(255,255,255,0.03);
+            --border: rgba(0,245,255,0.15);
+            --text: #e8e8f0;
+            --muted: #6e6e8a;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0a0a1a; color: white; overflow-x: hidden; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor { position: fixed; width: 12px; height: 12px; background: var(--cyan); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform 0.1s, background 0.3s; mix-blend-mode: difference; }
+        .cursor-ring { position: fixed; width: 40px; height: 40px; border: 1.5px solid rgba(0,245,255,0.4); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: all 0.15s ease-out; }
+
+        /* Canvas */
         #canvas-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-        nav { position: fixed; top: 0; width: 100%; z-index: 50; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(20px); border-bottom: 2px solid rgba(6, 182, 212, 0.3); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); }
-        .nav-container { max-width: 1400px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 2rem; font-weight: 900; background: linear-gradient(135deg, #22d3ee, #a855f7, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: glow 2s ease-in-out infinite alternate; }
-        @keyframes glow { from { filter: drop-shadow(0 0 5px rgba(34, 211, 238, 0.5)); } to { filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.8)); } }
-        .nav-links { display: flex; gap: 2.5rem; }
-        .nav-links button { background: none; border: none; color: #9ca3af; text-transform: uppercase; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.1em; cursor: pointer; transition: all 0.3s; position: relative; padding: 0.5rem 0; }
-        .nav-links button::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: linear-gradient(to right, #22d3ee, #a855f7); transition: width 0.3s; }
-        .nav-links button:hover::after, .nav-links button.active::after { width: 100%; }
-        .nav-links button:hover { color: white; transform: translateY(-2px); }
-        .nav-links button.active { color: #22d3ee; }
-        section { min-height: 100vh; display: none; align-items: center; justify-content: center; padding: 8rem 2rem 4rem; }
-        section.active { display: flex; animation: fadeInUp 0.8s ease-out; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-        .hero { text-align: center; max-width: 1200px; display: flex; flex-direction: column; align-items: center; }
-        .profile-photo-container { margin-bottom: 3rem; position: relative; }
-        .profile-photo { width: 250px; height: 250px; border-radius: 50%; object-fit: cover; border: 5px solid transparent; box-shadow: 0 0 40px rgba(34, 211, 238, 0.6), 0 0 80px rgba(168, 85, 247, 0.4); animation: photoGlow 3s ease-in-out infinite alternate; }
-        @keyframes photoGlow { from { box-shadow: 0 0 40px rgba(34, 211, 238, 0.6), 0 0 80px rgba(168, 85, 247, 0.4); transform: scale(1); } to { box-shadow: 0 0 60px rgba(168, 85, 247, 0.8), 0 0 100px rgba(236, 72, 153, 0.6); transform: scale(1.05); } }
-        .photo-ring { position: absolute; top: -15px; left: -15px; right: -15px; bottom: -15px; border: 3px solid; border-image: linear-gradient(135deg, #22d3ee, #a855f7, #ec4899, #f59e0b) 1; border-radius: 50%; animation: rotate 4s linear infinite; }
-        @keyframes rotate { 100% { transform: rotate(360deg); } }
-        .hero h1 { font-size: 6rem; font-weight: 900; margin-bottom: 1.5rem; background: linear-gradient(135deg, #22d3ee, #a855f7, #ec4899, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-size: 200% 200%; animation: gradientShift 3s ease infinite; line-height: 1.1; }
-        @keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-        .hero .tagline { font-size: 2.5rem; color: #d1d5db; margin-bottom: 1rem; font-weight: 300; }
-        .hero .subtitle { font-size: 1.8rem; background: linear-gradient(to right, #06b6d4, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 2rem; font-weight: 600; }
-        .hero .description { font-size: 1.3rem; color: #9ca3af; max-width: 55rem; margin: 0 auto 3rem; line-height: 1.8; }
-        .hero-buttons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
-        .btn-primary { padding: 1rem 3rem; background: linear-gradient(135deg, #06b6d4, #2563eb); border: none; border-radius: 50px; font-weight: 700; font-size: 1.1rem; color: white; cursor: pointer; transition: all 0.4s; text-decoration: none; display: inline-block; box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3); }
-        .btn-primary:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(6, 182, 212, 0.5); }
-        .btn-secondary { padding: 1rem 3rem; background: transparent; border: 3px solid #a855f7; border-radius: 50px; font-weight: 700; font-size: 1.1rem; color: white; cursor: pointer; transition: all 0.4s; text-decoration: none; display: inline-block; }
-        .btn-secondary:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(168, 85, 247, 0.4); }
-        .about-container, .contact-container, .projects-container, .skills-container { max-width: 75rem; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(20px); border-radius: 2rem; padding: 4rem; border: 2px solid rgba(6, 182, 212, 0.4); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); }
-        .section-title { font-size: 4rem; font-weight: 900; text-align: center; margin-bottom: 4rem; background: linear-gradient(135deg, #22d3ee, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .about-container p { font-size: 1.2rem; color: #d1d5db; line-height: 2; margin-bottom: 1.5rem; }
-        
-        .project-card { background: rgba(15, 15, 30, 0.7); border-radius: 1.5rem; padding: 2.5rem; margin-bottom: 2.5rem; border: 2px solid rgba(34, 211, 238, 0.3); transition: all 0.4s; cursor: pointer; }
-        .project-card:hover { transform: translateY(-10px); border-color: rgba(168, 85, 247, 0.6); box-shadow: 0 20px 50px rgba(168, 85, 247, 0.3); }
-        .project-title { font-size: 2rem; font-weight: 700; color: #22d3ee; margin-bottom: 0.5rem; }
-        .project-meta { font-size: 1rem; color: #9ca3af; margin-bottom: 1rem; font-style: italic; }
-        .project-description { font-size: 1.1rem; color: #d1d5db; line-height: 1.8; margin-bottom: 1rem; }
-        .project-tech { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.5rem; }
-        .tech-tag { background: linear-gradient(135deg, #1e3a8a, #7c3aed); padding: 0.5rem 1.2rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600; }
-        
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
-        .skill-category { background: rgba(15, 15, 30, 0.7); border-radius: 1.5rem; padding: 2rem; border: 2px solid rgba(34, 211, 238, 0.3); }
-        .skill-category h3 { font-size: 1.8rem; color: #a855f7; margin-bottom: 1.5rem; font-weight: 700; }
-        .skill-item { background: rgba(6, 182, 212, 0.1); padding: 0.8rem 1.2rem; border-radius: 10px; margin-bottom: 0.8rem; font-size: 1.1rem; color: #d1d5db; border-left: 4px solid #22d3ee; }
-        
-        .education-item { background: rgba(15, 15, 30, 0.7); border-radius: 1.5rem; padding: 2rem; margin-bottom: 2rem; border: 2px solid rgba(168, 85, 247, 0.3); }
-        .education-title { font-size: 1.8rem; color: #a855f7; font-weight: 700; margin-bottom: 0.5rem; }
-        .education-meta { font-size: 1.1rem; color: #9ca3af; margin-bottom: 0.8rem; }
-        .education-details { font-size: 1.1rem; color: #d1d5db; line-height: 1.8; }
-        
-        .contact-info { font-size: 1.3rem; color: #d1d5db; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
-        .contact-info span { font-size: 2rem; }
-        
-        @media (max-width: 768px) { 
-            .hero h1 { font-size: 3rem; } 
-            .profile-photo { width: 180px; height: 180px; }
-            .nav-links { gap: 1rem; }
-            .nav-links button { font-size: 0.8rem; }
-            .section-title { font-size: 2.5rem; }
+
+        /* Grid overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(0,245,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,245,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 50;
+            background: rgba(4,4,15,0.85);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-container { max-width: 1400px; margin: 0 auto; padding: 1.1rem 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.6rem; font-weight: 800;
+            letter-spacing: -0.02em;
+            color: white;
+        }
+        .logo span { color: var(--cyan); }
+        .nav-links { display: flex; gap: 0.5rem; }
+        .nav-links button {
+            background: none; border: none;
+            color: var(--muted);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem; font-weight: 500;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            cursor: none; transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            position: relative;
+        }
+        .nav-links button:hover { color: white; background: rgba(255,255,255,0.05); }
+        .nav-links button.active { color: var(--cyan); background: rgba(0,245,255,0.08); }
+
+        /* SECTIONS */
+        section { min-height: 100vh; display: none; align-items: center; justify-content: center; padding: 7rem 2rem 4rem; }
+        section.active { display: flex; animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) both; }
+        @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+
+        /* HERO */
+        .hero { text-align: center; max-width: 1100px; display: flex; flex-direction: column; align-items: center; }
+
+        .profile-wrap { position: relative; margin-bottom: 3rem; display: inline-block; }
+        .profile-photo {
+            width: 220px; height: 220px; border-radius: 50%; object-fit: cover;
+            border: 3px solid rgba(0,245,255,0.3);
+            box-shadow: 0 0 60px rgba(0,245,255,0.25), 0 0 120px rgba(191,90,242,0.15);
+        }
+        .orbit {
+            position: absolute; inset: -20px;
+            border-radius: 50%;
+            border: 1px dashed rgba(0,245,255,0.25);
+            animation: spin 12s linear infinite;
+        }
+        .orbit-dot {
+            position: absolute; top: -4px; left: 50%;
+            width: 8px; height: 8px; background: var(--cyan);
+            border-radius: 50%; transform: translateX(-50%);
+            box-shadow: 0 0 10px var(--cyan);
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .status-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(0,245,255,0.08); border: 1px solid rgba(0,245,255,0.2);
+            padding: 0.4rem 1rem; border-radius: 50px;
+            font-size: 0.8rem; color: var(--cyan); letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+        }
+        .status-dot { width: 6px; height: 6px; background: #0f0; border-radius: 50%; box-shadow: 0 0 6px #0f0; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, var(--cyan) 40%, var(--purple) 70%, var(--pink) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            background-size: 300% 300%;
+            animation: shimmer 5s ease infinite;
+        }
+        @keyframes shimmer { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
+
+        .hero-roles { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; margin-bottom: 1.5rem; }
+        .role-pill {
+            font-size: 0.78rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em;
+            padding: 0.35rem 0.9rem; border-radius: 4px;
+        }
+        .role-pill:nth-child(1) { background: rgba(0,245,255,0.1); color: var(--cyan); border: 1px solid rgba(0,245,255,0.2); }
+        .role-pill:nth-child(2) { background: rgba(191,90,242,0.1); color: var(--purple); border: 1px solid rgba(191,90,242,0.2); }
+        .role-pill:nth-child(3) { background: rgba(255,45,120,0.1); color: var(--pink); border: 1px solid rgba(255,45,120,0.2); }
+
+        .hero .description { font-size: 1.1rem; color: var(--muted); max-width: 50rem; margin: 0 auto 2.5rem; line-height: 1.9; }
+        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn-primary {
+            padding: 0.85rem 2.5rem; background: var(--cyan);
+            border: none; border-radius: 6px;
+            font-weight: 600; font-size: 0.95rem; color: #000;
+            cursor: none; transition: all 0.3s; text-decoration: none; display: inline-block;
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(0,245,255,0.35); background: #33f9ff; }
+        .btn-secondary {
+            padding: 0.85rem 2.5rem; background: transparent;
+            border: 1px solid rgba(191,90,242,0.5); border-radius: 6px;
+            font-weight: 600; font-size: 0.95rem; color: var(--purple);
+            cursor: none; transition: all 0.3s; text-decoration: none; display: inline-block;
+        }
+        .btn-secondary:hover { transform: translateY(-3px); background: rgba(191,90,242,0.1); box-shadow: 0 12px 35px rgba(191,90,242,0.2); }
+
+        /* CONTAINERS */
+        .about-container, .contact-container, .projects-container, .skills-container {
+            max-width: 78rem; width: 100%;
+            background: rgba(8,8,24,0.7);
+            backdrop-filter: blur(24px);
+            border-radius: 1.5rem;
+            padding: 4rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800; letter-spacing: -0.02em;
+            text-align: center; margin-bottom: 3.5rem;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+
+        /* ABOUT */
+        .about-container p { font-size: 1.1rem; color: var(--muted); line-height: 1.95; margin-bottom: 1.5rem; }
+        .about-subtitle {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem; font-weight: 700; color: var(--purple);
+            margin: 3rem 0 1.5rem; border-left: 3px solid var(--purple); padding-left: 1rem;
+        }
+        .education-item {
+            background: var(--card);
+            border-radius: 1rem; padding: 1.8rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid rgba(191,90,242,0.2);
+            transition: all 0.3s;
+        }
+        .education-item:hover { border-color: rgba(191,90,242,0.5); transform: translateX(5px); }
+        .education-title { font-family: 'Syne', sans-serif; font-size: 1.2rem; color: white; font-weight: 700; margin-bottom: 0.3rem; }
+        .education-meta { font-size: 0.95rem; color: var(--cyan); margin-bottom: 0.5rem; }
+        .education-details { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
+
+        /* PROJECTS */
+        .projects-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+
+        .project-card {
+            background: var(--card);
+            border-radius: 1.2rem; padding: 2.5rem;
+            border: 1px solid rgba(0,245,255,0.12);
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+            position: relative; overflow: hidden;
+        }
+        .project-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--cyan), var(--purple));
+            transform: scaleX(0); transform-origin: left;
+            transition: transform 0.4s;
+        }
+        .project-card:hover::before { transform: scaleX(1); }
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0,245,255,0.3);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4), 0 0 40px rgba(0,245,255,0.06);
+            background: rgba(0,245,255,0.03);
+        }
+
+        .project-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.8rem; flex-wrap: wrap; }
+        .project-title { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 700; color: white; }
+        .project-badge {
+            font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+            padding: 0.3rem 0.8rem; border-radius: 4px; white-space: nowrap;
+        }
+        .badge-team { background: rgba(0,245,255,0.1); color: var(--cyan); border: 1px solid rgba(0,245,255,0.2); }
+        .badge-personal { background: rgba(255,45,120,0.1); color: var(--pink); border: 1px solid rgba(255,45,120,0.2); }
+        .badge-wip { background: rgba(255,214,10,0.1); color: var(--gold); border: 1px solid rgba(255,214,10,0.2); }
+
+        .project-meta { font-size: 0.9rem; color: var(--muted); margin-bottom: 1.2rem; }
+        .project-description { font-size: 1rem; color: #b0b0c8; line-height: 1.85; margin-bottom: 1.5rem; }
+        .project-description strong { color: var(--cyan); font-weight: 500; }
+        .project-tech { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+        .tech-tag {
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+            padding: 0.3rem 0.9rem; border-radius: 4px;
+            font-size: 0.8rem; font-weight: 500; color: var(--muted);
+            transition: all 0.2s;
+        }
+        .tech-tag:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0,245,255,0.05); }
+
+        /* SKILLS */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .skill-category {
+            background: var(--card); border-radius: 1rem; padding: 2rem;
+            border: 1px solid rgba(0,245,255,0.1);
+            transition: all 0.3s;
+        }
+        .skill-category:hover { border-color: rgba(0,245,255,0.3); }
+        .skill-category h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem; font-weight: 700; color: var(--cyan);
+            text-transform: uppercase; letter-spacing: 0.1em;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(0,245,255,0.1);
+        }
+        .skill-item {
+            font-size: 0.95rem; color: var(--muted);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            display: flex; align-items: center; gap: 0.5rem;
+            transition: color 0.2s;
+        }
+        .skill-item::before { content: '▸'; color: var(--cyan); font-size: 0.7rem; opacity: 0.6; }
+        .skill-item:hover { color: var(--text); }
+
+        /* CONTACT */
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .contact-card {
+            background: var(--card); border-radius: 1rem; padding: 1.8rem;
+            border: 1px solid rgba(0,245,255,0.1); display: flex; gap: 1.2rem; align-items: flex-start;
+            transition: all 0.3s;
+        }
+        .contact-card:hover { border-color: rgba(0,245,255,0.3); transform: translateY(-3px); }
+        .contact-icon { font-size: 1.8rem; line-height: 1; }
+        .contact-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.4rem; }
+        .contact-value { font-size: 1rem; color: var(--text); }
+        .contact-value a { color: var(--cyan); text-decoration: none; }
+        .contact-value a:hover { text-decoration: underline; }
+
+        .ref-subtitle {
+            font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 700;
+            color: var(--purple); margin-bottom: 1.5rem; border-left: 3px solid var(--purple); padding-left: 1rem;
+        }
+        .ref-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.2rem; }
+        .ref-card {
+            background: var(--card); border-radius: 1rem; padding: 1.8rem;
+            border: 1px solid rgba(191,90,242,0.15);
+            transition: all 0.3s;
+        }
+        .ref-card:hover { border-color: rgba(191,90,242,0.4); }
+        .ref-name { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: white; margin-bottom: 0.3rem; }
+        .ref-role { font-size: 0.9rem; color: var(--purple); margin-bottom: 0.8rem; }
+        .ref-contact { font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: rgba(0,245,255,0.3); border-radius: 3px; }
+
+        @media (max-width: 768px) {
+            .about-container, .contact-container, .projects-container, .skills-container { padding: 2rem 1.5rem; }
+            .nav-links { gap: 0.2rem; }
+            .nav-links button { font-size: 0.72rem; padding: 0.4rem 0.6rem; }
+            body { cursor: auto; }
+            .cursor, .cursor-ring { display: none; }
         }
     </style>
 </head>
 <body>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
     <div id="canvas-container"></div>
+
     <nav>
         <div class="nav-container">
-            <div class="logo">AV</div>
+            <div class="logo">A<span>V</span></div>
             <div class="nav-links">
                 <button onclick="showSection('home')" class="active" data-section="home">Home</button>
                 <button onclick="showSection('about')" data-section="about">About</button>
@@ -87,57 +330,58 @@
         </div>
     </nav>
 
+    <!-- HOME -->
     <section id="home" class="active">
         <div class="hero">
-            <div class="profile-photo-container">
-                <div class="photo-ring"></div>
+            <div class="profile-wrap">
+                <div class="orbit"><div class="orbit-dot"></div></div>
                 <img src="av.jpeg" alt="Avishka Vikum" class="profile-photo">
             </div>
+            <div class="status-badge"><span class="status-dot"></span> Available for Internship</div>
             <h1>Avishka Vikum</h1>
-            <p class="tagline">Software Engineering Intern</p>
-            <p class="subtitle">Full Stack Developer | AI Enthusiast | Mobile App Developer</p>
-            <p class="description">Results-driven Software Engineering undergraduate at SLIIT with proven expertise in full-stack development using the MERN stack, AI API integration, and Agile methodologies. Proficient in leveraging project management platforms including Jira, ClickUp, and Confluence to deliver high-quality solutions. Committed to creating innovative, user-centric web and mobile applications that solve real-world problems.</p>
+            <div class="hero-roles">
+                <span class="role-pill">Full Stack Developer</span>
+                <span class="role-pill">AI Enthusiast</span>
+                <span class="role-pill">Mobile App Developer</span>
+            </div>
+            <p class="description">Results-driven Software Engineering undergraduate at SLIIT with proven expertise in full-stack development using the MERN stack, AI API integration, and Agile methodologies. Committed to creating innovative, user-centric web and mobile applications that solve real-world problems.</p>
             <div class="hero-buttons">
                 <a href="https://github.com/Avishka137" target="_blank" class="btn-primary">🚀 View GitHub</a>
-                <a href="https://www.linkedin.com/in/avishka-vikum-5475b9277" target="_blank" class="btn-secondary">💼 LinkedIn Profile</a>
+                <a href="https://www.linkedin.com/in/avishka-vikum-5475b9277" target="_blank" class="btn-secondary">💼 LinkedIn</a>
             </div>
         </div>
     </section>
 
+    <!-- ABOUT -->
     <section id="about">
         <div class="about-container">
             <h2 class="section-title">About Me</h2>
             <p>Results-driven Software Engineering undergraduate at SLIIT with proven expertise in full-stack development using the MERN stack, AI API integration, and Agile methodologies. Proficient in leveraging project management platforms including Jira, ClickUp, and Confluence to deliver high-quality solutions. Committed to creating innovative, user-centric web and mobile applications that solve real-world problems. Seeking a Software Engineering Internship to apply technical skills, drive impactful projects, and accelerate professional growth in a dynamic, collaborative environment.</p>
-            
-            <h3 style="font-size: 2.5rem; color: #a855f7; margin-top: 3rem; margin-bottom: 2rem;">Education</h3>
-            
+
+            <div class="about-subtitle">Education</div>
+
             <div class="education-item">
                 <div class="education-title">BSc (Hons) in Information Technology</div>
-                <div class="education-meta">Sri Lanka Institute of Information Technology (SLIIT), Malabe | 2023 - PRESENT</div>
+                <div class="education-meta">Sri Lanka Institute of Information Technology (SLIIT), Malabe | 2023 – Present</div>
                 <div class="education-details">Specializing in Software Engineering</div>
             </div>
-            
             <div class="education-item">
                 <div class="education-title">Certified in Advanced OOP Analysis</div>
                 <div class="education-meta">10Pearls University, Pakistan | 2024</div>
             </div>
-            
             <div class="education-item">
                 <div class="education-title">Certified in Python Programming</div>
                 <div class="education-meta">University of Moratuwa & CISCO Networking Academy | 2024</div>
             </div>
-            
             <div class="education-item">
                 <div class="education-title">Certified in Web Designing</div>
                 <div class="education-meta">University of Moratuwa | 2024</div>
             </div>
-            
             <div class="education-item">
                 <div class="education-title">G.C.E. Advanced Level</div>
                 <div class="education-meta">Sri Subhuthi National School, Baththaramulle | 2021</div>
-                <div class="education-details">ICT - B | SFT - C | ET - C | Z-Score: 1.0948</div>
+                <div class="education-details">ICT – B | SFT – C | ET – C | Z-Score: 1.0948</div>
             </div>
-            
             <div class="education-item">
                 <div class="education-title">G.C.E. Ordinary Level</div>
                 <div class="education-meta">M.D.H. Jayawardena School, Koswatte | 2018</div>
@@ -145,132 +389,206 @@
         </div>
     </section>
 
+    <!-- PROJECTS -->
     <section id="projects">
         <div class="projects-container">
             <h2 class="section-title">Projects</h2>
-            
-            <div class="project-card">
-                <div class="project-title">Charity Management System – Web Application</div>
-                <div class="project-meta">Jul 2025 – Oct 2025 | Team Project (5 Members – Agile)</div>
-                <div class="project-description">
-                    A MERN stack-based donation platform connecting donors and beneficiaries for transparent charitable activities.
-                    <br><br>
-                    <strong>My Contribution:</strong> Developed a workshop management module enabling donors to participate in handcraft learning sessions. Implemented scheduling, registration, and material tracking features using React.js and Node.js, collaborating through Agile sprints for seamless integration.
+            <div class="projects-grid">
+
+                <!-- 1. Healthcare (moved to first) -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">Healthcare Management System</div>
+                        <span class="project-badge badge-team">Team Project</span>
+                    </div>
+                    <div class="project-meta">Jul 2025 – Oct 2025 | MERN Stack · Agile</div>
+                    <div class="project-description">
+                        A centralized healthcare platform connecting patients and doctors for seamless online consultations, appointment scheduling, and medical record management — bringing quality healthcare access to your fingertips.
+                        <br><br>
+                        <strong>My Contribution:</strong> Built an AI-powered report generation feature using the Gemini API to intelligently analyze patient data and deliver personalized healthcare recommendations, reducing diagnosis time and enhancing clinical decision support.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">Express.js</span>
+                        <span class="tech-tag">React.js</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Stripe</span>
+                        <span class="tech-tag">Gemini API</span>
+                    </div>
                 </div>
-                <div class="project-tech">
-                    <span class="tech-tag">MongoDB</span>
-                    <span class="tech-tag">Express.js</span>
-                    <span class="tech-tag">React.js</span>
-                    <span class="tech-tag">Node.js</span>
-                    <span class="tech-tag">Tailwind CSS</span>
-                    <span class="tech-tag">JWT</span>
-                    <span class="tech-tag">Stripe</span>
+
+                <!-- 2. VikLib (NEW) -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">VikLib – Digital Library Platform</div>
+                        <span class="project-badge badge-personal">Personal Project</span>
+                    </div>
+                    <div class="project-meta">2025 | Full Stack · MERN</div>
+                    <div class="project-description">
+                        Life is busy — but your reading shouldn't stop. VikLib is a feature-rich digital library platform designed for people on the go, allowing users to discover, borrow, and read their favorite books entirely from home. Browse an extensive catalog, manage a personal reading list, and pick up right where you left off across any device.
+                        <br><br>
+                        Built with the MERN stack, VikLib delivers a smooth, modern reading experience with secure user authentication, personalized book recommendations, progress tracking, and a clean reader interface — making quality literature more accessible than ever.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">Express.js</span>
+                        <span class="tech-tag">React.js</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">JWT Auth</span>
+                        <span class="tech-tag">Tailwind CSS</span>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-title">Charity Management System – Mobile Application</div>
-                <div class="project-meta">Jul 2025 – Oct 2025 | Team Project</div>
-                <div class="project-description">
-                    React Native version of the charity platform enabling users to donate and access support on the go.
-                    <br><br>
-                    <strong>My Contribution:</strong> Developed a workshop module for donors to learn handcraft skills, implementing scheduling and registration features using React Native and Expo.
+
+                <!-- 3. Charity Web -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">Charity Management System – Web Application</div>
+                        <span class="project-badge badge-team">Team · 5 Members</span>
+                    </div>
+                    <div class="project-meta">Jul 2025 – Oct 2025 | MERN Stack · Agile Sprints</div>
+                    <div class="project-description">
+                        A MERN stack-based donation platform connecting donors and beneficiaries for transparent and impactful charitable activities.
+                        <br><br>
+                        <strong>My Contribution:</strong> Developed a workshop management module enabling donors to participate in handcraft learning sessions. Implemented scheduling, registration, and material tracking using React.js and Node.js, collaborating through Agile sprints for seamless integration.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">Express.js</span>
+                        <span class="tech-tag">React.js</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Tailwind CSS</span>
+                        <span class="tech-tag">JWT</span>
+                        <span class="tech-tag">Stripe</span>
+                    </div>
                 </div>
-                <div class="project-tech">
-                    <span class="tech-tag">React Native</span>
-                    <span class="tech-tag">Expo</span>
-                    <span class="tech-tag">NativeWind</span>
-                    <span class="tech-tag">Appwrite</span>
-                    <span class="tech-tag">Gemini API</span>
-                    <span class="tech-tag">Stripe</span>
+
+                <!-- 4. Goals for Goals (NEW - WIP) -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">Goals for Goals – Partnerships SDG App</div>
+                        <span class="project-badge badge-wip">In Progress</span>
+                    </div>
+                    <div class="project-meta">2025 – Present | Team Project · MERN Stack · UN SDG API</div>
+                    <div class="project-description">
+                        A collaborative platform empowering organizations and individuals to form meaningful partnerships aligned with the United Nations Sustainable Development Goals. The app bridges goal-setters with like-minded partners, tracking progress and fostering global impact.
+                        <br><br>
+                        <strong>My Contribution:</strong> Engineered the SDG Management module — integrating the official UN SDG API to dynamically fetch, display, and map all 17 Sustainable Development Goals. Built the partnership matching logic to align user objectives with relevant SDGs, enabling data-driven collaboration for real-world impact.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">Express.js</span>
+                        <span class="tech-tag">React.js</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">UN SDG API</span>
+                        <span class="tech-tag">Tailwind CSS</span>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-title">Healthcare Management System</div>
-                <div class="project-meta">Jul 2025 – Oct 2025 | Team Project</div>
-                <div class="project-description">
-                    A centralized healthcare platform connecting patients and doctors for online consultations.
-                    <br><br>
-                    <strong>My Contribution:</strong> Built an AI report generation feature using Gemini API to analyze patient data and provide personalized healthcare recommendations.
+
+                <!-- 5. Charity Mobile (moved to middle) -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">Charity Management System – Mobile Application</div>
+                        <span class="project-badge badge-team">Team Project</span>
+                    </div>
+                    <div class="project-meta">Jul 2025 – Oct 2025 | React Native · Expo</div>
+                    <div class="project-description">
+                        React Native companion to the charity platform, enabling users to donate, access support, and engage with charitable workshops directly from their mobile devices.
+                        <br><br>
+                        <strong>My Contribution:</strong> Developed the mobile workshop module for donors to learn handcraft skills on the go, implementing scheduling and registration features using React Native, Expo, and Appwrite as the backend.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">React Native</span>
+                        <span class="tech-tag">Expo</span>
+                        <span class="tech-tag">NativeWind</span>
+                        <span class="tech-tag">Appwrite</span>
+                        <span class="tech-tag">Gemini API</span>
+                        <span class="tech-tag">Stripe</span>
+                    </div>
                 </div>
-                <div class="project-tech">
-                    <span class="tech-tag">MERN Stack</span>
-                    <span class="tech-tag">Stripe</span>
-                    <span class="tech-tag">Gemini API</span>
+
+                <!-- 6. Fish Haven -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">Fish Haven – Ornamental Fish Farm Management</div>
+                        <span class="project-badge badge-team">Team Project</span>
+                    </div>
+                    <div class="project-meta">Jun 2025 – Aug 2025 | MERN Stack</div>
+                    <div class="project-description">
+                        A comprehensive management system for an ornamental fish export business — handling delivery logistics, employee management, inventory control, and export operations from one unified dashboard.
+                        <br><br>
+                        <strong>My Contribution:</strong> Developed the Employee Management module with automated salary generation, attendance tracking, and full payroll processing capabilities.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">Express.js</span>
+                        <span class="tech-tag">React.js</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">JWT Authentication</span>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-title">Fish Haven – Ornamental Fish Farm Management System</div>
-                <div class="project-meta">Jun 2025 – Aug 2025 | Team Project</div>
-                <div class="project-description">
-                    A management system for export operations, delivery, employee, and inventory handling.
-                    <br><br>
-                    <strong>My Contribution:</strong> Developed the Employee Management module with automated salary generation, attendance tracking, and payroll processing features.
+
+                <!-- 7. AI HR Chatbot -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">AI Powered HR Chatbot</div>
+                        <span class="project-badge badge-personal">Personal Project</span>
+                    </div>
+                    <div class="project-meta">Nov 2025 – Dec 2025 | JavaScript · Gemini AI</div>
+                    <div class="project-description">
+                        An intelligent HR assistant providing instant, natural-language support for recruitment and hiring processes — helping candidates navigate job applications, interview stages, and company policy queries with zero wait time.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Google Gemini API</span>
+                    </div>
                 </div>
-                <div class="project-tech">
-                    <span class="tech-tag">MERN Stack</span>
-                    <span class="tech-tag">JWT Authentication</span>
+
+                <!-- 8. Kivy Chat -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-title">Kivy Chat Application</div>
+                        <span class="project-badge badge-personal">Personal Project</span>
+                    </div>
+                    <div class="project-meta">Dec 2025 | Python · Kivy</div>
+                    <div class="project-description">
+                        A cross-platform desktop chat application built with Python and the Kivy framework, featuring secure user authentication, real-time messaging, and full profile management — all stored locally via SQLite3.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Kivy</span>
+                        <span class="tech-tag">SQLite3</span>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-title">AI Powered HR-Chatbot</div>
-                <div class="project-meta">Nov 2025 – Dec 2025 | Personal Project</div>
-                <div class="project-description">
-                    An intelligent chatbot providing instant recruitment and hiring support using natural language processing, helping candidates and employees with job applications, interview processes, and company policies.
-                </div>
-                <div class="project-tech">
-                    <span class="tech-tag">HTML</span>
-                    <span class="tech-tag">CSS</span>
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">Google Gemini AI API</span>
-                </div>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-title">KIVY-CHAT-APPLICATION</div>
-                <div class="project-meta">Dec 2025 | Personal Project</div>
-                <div class="project-description">
-                    A desktop chat application with user authentication, real-time messaging, and profile management built using Python and Kivy framework.
-                </div>
-                <div class="project-tech">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Kivy</span>
-                    <span class="tech-tag">SQLite3</span>
-                </div>
+
             </div>
         </div>
     </section>
 
+    <!-- SKILLS -->
     <section id="skills">
         <div class="skills-container">
             <h2 class="section-title">Skills & Technologies</h2>
-            
             <div class="skills-grid">
                 <div class="skill-category">
                     <h3>Programming Languages</h3>
-                    <div class="skill-item">C Language</div>
-                    <div class="skill-item">C++ Language</div>
                     <div class="skill-item">JavaScript</div>
                     <div class="skill-item">Python</div>
                     <div class="skill-item">Java</div>
-                    <div class="skill-item">HTML</div>
-                    <div class="skill-item">CSS</div>
+                    <div class="skill-item">C / C++</div>
+                    <div class="skill-item">HTML & CSS</div>
                     <div class="skill-item">PHP</div>
                 </div>
-                
                 <div class="skill-category">
                     <h3>Frameworks & Libraries</h3>
-                    <div class="skill-item">MERN Stack (MongoDB, Express.js, React.js, Node.js)</div>
+                    <div class="skill-item">MERN Stack</div>
                     <div class="skill-item">React Native</div>
                     <div class="skill-item">Spring Boot</div>
                     <div class="skill-item">Tailwind CSS</div>
                     <div class="skill-item">NativeWind</div>
                     <div class="skill-item">Expo</div>
                 </div>
-                
                 <div class="skill-category">
                     <h3>Databases</h3>
                     <div class="skill-item">MongoDB</div>
@@ -278,7 +596,6 @@
                     <div class="skill-item">ORDB SQL</div>
                     <div class="skill-item">SQLite3</div>
                 </div>
-                
                 <div class="skill-category">
                     <h3>Tools & Platforms</h3>
                     <div class="skill-item">GitHub</div>
@@ -288,122 +605,150 @@
                     <div class="skill-item">ClickUp</div>
                     <div class="skill-item">Confluence</div>
                 </div>
-                
+                <div class="skill-category">
+                    <h3>AI & APIs</h3>
+                    <div class="skill-item">Google Gemini API</div>
+                    <div class="skill-item">UN SDG API</div>
+                    <div class="skill-item">Stripe Payments</div>
+                    <div class="skill-item">REST API Design</div>
+                </div>
                 <div class="skill-category">
                     <h3>Soft Skills</h3>
-                    <div class="skill-item">Team Collaboration & Communication</div>
-                    <div class="skill-item">Problem Solving & Critical Thinking</div>
-                    <div class="skill-item">Time Management & Task Prioritization</div>
+                    <div class="skill-item">Team Collaboration</div>
+                    <div class="skill-item">Problem Solving</div>
+                    <div class="skill-item">Time Management</div>
                     <div class="skill-item">Agile Methodologies</div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact">
         <div class="contact-container">
             <h2 class="section-title">Contact Me</h2>
-            <div class="contact-info">
-                <span>📧</span>
-                <div>
-                    <strong>Email:</strong><br>
-                    <a href="mailto:avishkavikum731@gmail.com" style="color: #22d3ee; text-decoration: none;">avishkavikum731@gmail.com</a>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <div>
+                        <div class="contact-label">Email</div>
+                        <div class="contact-value"><a href="mailto:avishkavikum731@gmail.com">avishkavikum731@gmail.com</a></div>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <div>
+                        <div class="contact-label">Phone</div>
+                        <div class="contact-value">071 3300 659 / 078 2641 375</div>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <div class="contact-label">Location</div>
+                        <div class="contact-value">Thalangama North, Koswatte, Colombo, Sri Lanka</div>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">💼</div>
+                    <div>
+                        <div class="contact-label">LinkedIn</div>
+                        <div class="contact-value"><a href="https://www.linkedin.com/in/avishka-vikum-5475b9277" target="_blank">linkedin.com/in/avishka-vikum</a></div>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">🚀</div>
+                    <div>
+                        <div class="contact-label">GitHub</div>
+                        <div class="contact-value"><a href="https://github.com/Avishka137" target="_blank">github.com/Avishka137</a></div>
+                    </div>
                 </div>
             </div>
-            <div class="contact-info">
-                <span>📱</span>
-                <div>
-                    <strong>Phone:</strong><br>
-                    071 3300 659 / 078 2641 375
+
+            <div class="ref-subtitle">References</div>
+            <div class="ref-grid">
+                <div class="ref-card">
+                    <div class="ref-name">Mr. Janith Udara Herath</div>
+                    <div class="ref-role">Senior DevOps Engineer, Insighture</div>
+                    <div class="ref-contact">📞 +94 61 895 0333<br>📧 janithherath94@gmail.com</div>
                 </div>
-            </div>
-            <div class="contact-info">
-                <span>📍</span>
-                <div>
-                    <strong>Location:</strong><br>
-                    245/2, Thalangama North, Koswatte, Pipe Rd, 2nd Lane, Colombo, Sri Lanka
-                </div>
-            </div>
-            <div class="contact-info">
-                <span>💼</span>
-                <div>
-                    <strong>LinkedIn:</strong><br>
-                    <a href="https://www.linkedin.com/in/avishka-vikum-5475b9277" target="_blank" style="color: #22d3ee; text-decoration: none;">linkedin.com/in/avishka-vikum</a>
-                </div>
-            </div>
-            <div class="contact-info">
-                <span>🚀</span>
-                <div>
-                    <strong>GitHub:</strong><br>
-                    <a href="https://github.com/Avishka137" target="_blank" style="color: #22d3ee; text-decoration: none;">github.com/Avishka137</a>
-                </div>
-            </div>
-            
-            <h3 style="font-size: 2rem; color: #a855f7; margin-top: 3rem; margin-bottom: 1.5rem;">References</h3>
-            <div class="education-item">
-                <div class="education-title">Mr. Janith Udara Herath</div>
-                <div class="education-details" style="margin-top: 1rem;">
-                    Senior DevOps Engineer, Insighture<br>
-                    📞 +94 61 895 0333<br>
-                    📧 janithherath94@gmail.com
-                </div>
-            </div>
-            <div class="education-item">
-                <div class="education-title">Mr. Kanishka Madhuranga</div>
-                <div class="education-details" style="margin-top: 1rem;">
-                    Senior Software Engineer, TIQRI<br>
-                    📞 +94 76 803 6385<br>
-                    📧 wkm@tiqri.com
+                <div class="ref-card">
+                    <div class="ref-name">Mr. Kanishka Madhuranga</div>
+                    <div class="ref-role">Senior Software Engineer, TIQRI</div>
+                    <div class="ref-contact">📞 +94 76 803 6385<br>📧 wkm@tiqri.com</div>
                 </div>
             </div>
         </div>
     </section>
 
     <script>
-        function showSection(sectionId) {
-            document.querySelectorAll('section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById(sectionId).classList.add('active');
+        // Custom cursor
+        const cursor = document.getElementById('cursor');
+        const ring = document.getElementById('cursorRing');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
+        function animRing() { rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(animRing); }
+        animRing();
+        document.querySelectorAll('a,button,.project-card,.contact-card').forEach(el => {
+            el.addEventListener('mouseenter', () => { cursor.style.transform='translate(-50%,-50%) scale(1.8)'; ring.style.transform='translate(-50%,-50%) scale(1.4)'; });
+            el.addEventListener('mouseleave', () => { cursor.style.transform='translate(-50%,-50%) scale(1)'; ring.style.transform='translate(-50%,-50%) scale(1)'; });
+        });
 
-            document.querySelectorAll('.nav-links button').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
-
+        // Navigation
+        function showSection(id) {
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelector(`[data-section="${id}"]`).classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // Three.js Background
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000);
         camera.position.z = 5;
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(innerWidth, innerHeight);
+        renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
         document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-        const particlesGeometry = new THREE.BufferGeometry();
-        const particleCount = 2000;
-        const positions = new Float32Array(particleCount * 3);
-        for (let i = 0; i < particleCount * 3; i++) {
-            positions[i] = (Math.random() - 0.5) * 50;
+        // Stars
+        const geo = new THREE.BufferGeometry();
+        const count = 2500;
+        const pos = new Float32Array(count * 3);
+        const col = new Float32Array(count * 3);
+        for (let i = 0; i < count; i++) {
+            pos[i*3] = (Math.random()-0.5)*60;
+            pos[i*3+1] = (Math.random()-0.5)*60;
+            pos[i*3+2] = (Math.random()-0.5)*60;
+            const c = Math.random();
+            col[i*3] = c < 0.4 ? 0 : c < 0.7 ? 0.75 : 1;
+            col[i*3+1] = c < 0.4 ? 0.96 : c < 0.7 ? 0.35 : 1;
+            col[i*3+2] = c < 0.4 ? 1 : c < 0.7 ? 0.95 : 1;
         }
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        const particlesMaterial = new THREE.PointsMaterial({ size: 0.05, color: 0x22d3ee });
-        const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particles);
+        geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+        geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+        const mat = new THREE.PointsMaterial({ size: 0.045, vertexColors: true, transparent: true, opacity: 0.8 });
+        const points = new THREE.Points(geo, mat);
+        scene.add(points);
+
+        let mouseX = 0, mouseY = 0;
+        document.addEventListener('mousemove', e => { mouseX = (e.clientX/innerWidth-0.5)*0.3; mouseY = (e.clientY/innerHeight-0.5)*0.3; });
 
         function animate() {
             requestAnimationFrame(animate);
-            particles.rotation.y += 0.001;
+            points.rotation.y += 0.0005;
+            points.rotation.x += 0.0002;
+            camera.position.x += (mouseX - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY - camera.position.y) * 0.05;
             renderer.render(scene, camera);
         }
         animate();
 
         window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.aspect = innerWidth/innerHeight;
             camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setSize(innerWidth, innerHeight);
         });
     </script>
 </body>
