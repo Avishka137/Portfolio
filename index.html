@@ -42,12 +42,21 @@
         .role-pill:nth-child(1) { background:rgba(0,245,255,0.1); color:var(--cyan); border:1px solid rgba(0,245,255,0.2); }
         .role-pill:nth-child(2) { background:rgba(191,90,242,0.1); color:var(--purple); border:1px solid rgba(191,90,242,0.2); }
         .role-pill:nth-child(3) { background:rgba(255,45,120,0.1); color:var(--pink); border:1px solid rgba(255,45,120,0.2); }
+        .role-pill:nth-child(4) { background:rgba(0,245,255,0.1); color:var(--cyan); border:1px solid rgba(0,245,255,0.2); }
+        .role-pill:nth-child(5) { background:rgba(191,90,242,0.1); color:var(--purple); border:1px solid rgba(191,90,242,0.2); }
         .hero p { font-size:1.1rem; color:var(--muted); max-width:50rem; margin:0 auto 2.5rem; line-height:1.9; }
         .hero-buttons { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
         .btn-primary { padding:0.85rem 2.5rem; background:var(--cyan); border:none; border-radius:6px; font-weight:600; font-size:0.95rem; color:#000; cursor:pointer; transition:all 0.3s; text-decoration:none; display:inline-block; }
         .btn-primary:hover { transform:translateY(-3px); box-shadow:0 12px 35px rgba(0,245,255,0.35); }
         .btn-secondary { padding:0.85rem 2.5rem; background:transparent; border:1px solid rgba(191,90,242,0.5); border-radius:6px; font-weight:600; font-size:0.95rem; color:var(--purple); cursor:pointer; transition:all 0.3s; text-decoration:none; display:inline-block; }
         .btn-secondary:hover { transform:translateY(-3px); background:rgba(191,90,242,0.1); }
+
+        /* ── NEW CV BUTTONS ── */
+        .btn-cv-view { padding:0.85rem 2rem; background:transparent; border:1px solid rgba(0,245,255,0.5); border-radius:6px; font-weight:600; font-size:0.95rem; color:var(--cyan); cursor:pointer; transition:all 0.3s; text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; }
+        .btn-cv-view:hover { transform:translateY(-3px); background:rgba(0,245,255,0.08); box-shadow:0 8px 25px rgba(0,245,255,0.2); }
+        .btn-cv-download { padding:0.85rem 2rem; background:linear-gradient(135deg,var(--cyan),var(--purple)); border:none; border-radius:6px; font-weight:700; font-size:0.95rem; color:#000; cursor:pointer; transition:all 0.3s; text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; }
+        .btn-cv-download:hover { transform:translateY(-3px); box-shadow:0 12px 35px rgba(0,245,255,0.3); opacity:0.9; }
+
         .container { max-width:78rem; margin:0 auto; background:rgba(8,8,24,0.8); backdrop-filter:blur(24px); border-radius:1.5rem; padding:4rem; border:1px solid var(--border); box-shadow:0 30px 80px rgba(0,0,0,0.5); }
         .section-title { font-family:'Bebas Neue',cursive; font-size:clamp(2.5rem,5vw,3.5rem); text-align:center; margin-bottom:3rem; background:linear-gradient(135deg,var(--cyan),var(--purple)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:0.05em; }
         .about-text { font-size:1.1rem; color:var(--muted); line-height:1.95; margin-bottom:1.5rem; }
@@ -57,24 +66,42 @@
         .edu-title { font-family:'Bebas Neue',cursive; font-size:1.3rem; color:white; margin-bottom:0.3rem; }
         .edu-meta { font-size:0.95rem; color:var(--cyan); margin-bottom:0.4rem; }
         .edu-detail { font-size:0.95rem; color:var(--muted); }
-        .projects-grid { display:grid; gap:2rem; }
-        .project-card { background:var(--card); border-radius:1.2rem; padding:2.5rem; border:1px solid rgba(0,245,255,0.12); transition:all 0.4s; position:relative; overflow:hidden; }
-        .project-card::before { content:''; position:absolute; top:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--cyan),var(--purple)); transform:scaleX(0); transform-origin:left; transition:transform 0.4s; }
+
+        /* ── IMPROVED PROJECT CARDS ── */
+        .projects-grid { display:grid; gap:2.2rem; }
+        .project-card { background:rgba(6,6,20,0.85); border-radius:1.4rem; border:1px solid rgba(0,245,255,0.10); transition:all 0.4s cubic-bezier(0.23,1,0.32,1); position:relative; overflow:hidden; display:grid; grid-template-rows:auto 1fr auto; }
+        .project-card::before { content:''; position:absolute; top:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink)); transform:scaleX(0); transform-origin:left; transition:transform 0.4s; }
         .project-card:hover::before { transform:scaleX(1); }
-        .project-card:hover { transform:translateY(-8px); border-color:rgba(0,245,255,0.3); box-shadow:0 25px 60px rgba(0,0,0,0.4); }
-        .project-header { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; margin-bottom:0.8rem; flex-wrap:wrap; }
-        .project-title { font-family:'Bebas Neue',cursive; font-size:1.6rem; color:white; letter-spacing:0.03em; }
-        .badge { font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; padding:0.3rem 0.8rem; border-radius:4px; white-space:nowrap; }
-        .badge-team { background:rgba(0,245,255,0.1); color:var(--cyan); border:1px solid rgba(0,245,255,0.2); }
-        .badge-personal { background:rgba(255,45,120,0.1); color:var(--pink); border:1px solid rgba(255,45,120,0.2); }
-        .badge-wip { background:rgba(255,214,10,0.1); color:var(--gold); border:1px solid rgba(255,214,10,0.2); }
-        .project-meta { font-size:0.9rem; color:var(--muted); margin-bottom:1.2rem; }
-        .project-desc { font-size:1rem; color:#b0b0c8; line-height:1.85; margin-bottom:1.5rem; }
-        .project-desc strong { color:var(--cyan); font-weight:500; }
-        .tech-tags { display:flex; flex-wrap:wrap; gap:0.6rem; }
-        .tag { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); padding:0.3rem 0.9rem; border-radius:4px; font-size:0.8rem; color:var(--muted); }
+        .project-card:hover { transform:translateY(-10px); border-color:rgba(0,245,255,0.28); box-shadow:0 30px 70px rgba(0,0,0,0.5),0 0 40px rgba(0,245,255,0.06); }
+        .project-card-header { padding:2rem 2rem 0; }
+        .project-card-body { padding:0 2rem; }
+        .project-card-footer { padding:0 2rem 2rem; }
+
+        /* Number badge */
+        .project-number { font-family:'Bebas Neue',cursive; font-size:4rem; color:rgba(0,245,255,0.06); line-height:1; position:absolute; top:1rem; right:1.5rem; letter-spacing:0.05em; pointer-events:none; user-select:none; }
+        .project-header { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; margin-bottom:0.6rem; flex-wrap:wrap; }
+        .project-title { font-family:'Bebas Neue',cursive; font-size:1.7rem; color:white; letter-spacing:0.03em; line-height:1.1; }
+        .badge { font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; padding:0.3rem 0.9rem; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+        .badge-team { background:rgba(0,245,255,0.1); color:var(--cyan); border:1px solid rgba(0,245,255,0.25); }
+        .badge-personal { background:rgba(255,45,120,0.1); color:var(--pink); border:1px solid rgba(255,45,120,0.25); }
+        .badge-wip { background:rgba(255,214,10,0.1); color:var(--gold); border:1px solid rgba(255,214,10,0.25); }
+        .project-meta { font-size:0.88rem; color:rgba(0,245,255,0.5); margin-bottom:1rem; font-weight:500; letter-spacing:0.03em; display:flex; align-items:center; gap:0.5rem; }
+        .project-meta::before { content:''; display:inline-block; width:20px; height:1px; background:rgba(0,245,255,0.4); }
+        .project-desc { font-size:1rem; color:#9090b0; line-height:1.85; margin-bottom:1.5rem; }
+        .project-desc strong { color:var(--cyan); font-weight:600; }
+
+        /* Contribution highlight box */
+        .contribution-box { background:rgba(0,245,255,0.04); border:1px solid rgba(0,245,255,0.12); border-radius:0.7rem; padding:1rem 1.2rem; margin-bottom:1.5rem; }
+        .contribution-label { font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--cyan); opacity:0.7; margin-bottom:0.4rem; }
+        .contribution-text { font-size:0.95rem; color:#b0b8d0; line-height:1.7; }
+
+        .tech-tags { display:flex; flex-wrap:wrap; gap:0.5rem; padding-top:1rem; border-top:1px solid rgba(255,255,255,0.05); }
+        .tag { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.09); padding:0.28rem 0.85rem; border-radius:4px; font-size:0.78rem; color:rgba(180,180,200,0.8); font-weight:500; transition:all 0.2s; }
+        .tag:hover { background:rgba(0,245,255,0.08); border-color:rgba(0,245,255,0.2); color:var(--cyan); }
+
         .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem; }
-        .skill-cat { background:var(--card); border-radius:1rem; padding:2rem; border:1px solid rgba(0,245,255,0.1); }
+        .skill-cat { background:var(--card); border-radius:1rem; padding:2rem; border:1px solid rgba(0,245,255,0.1); transition:border-color 0.3s; }
+        .skill-cat:hover { border-color:rgba(0,245,255,0.25); }
         .skill-cat h3 { font-family:'Bebas Neue',cursive; font-size:1.1rem; color:var(--cyan); letter-spacing:0.1em; margin-bottom:1.2rem; padding-bottom:0.8rem; border-bottom:1px solid rgba(0,245,255,0.1); }
         .skill-item { font-size:0.95rem; color:var(--muted); padding:0.5rem 0; border-bottom:1px solid rgba(255,255,255,0.03); display:flex; align-items:center; gap:0.5rem; }
         .skill-item::before { content:'▸'; color:var(--cyan); font-size:0.7rem; opacity:0.6; }
@@ -90,10 +117,33 @@
         .ref-name { font-family:'Bebas Neue',cursive; font-size:1.2rem; color:white; margin-bottom:0.3rem; }
         .ref-role { font-size:0.9rem; color:var(--purple); margin-bottom:0.8rem; }
         .ref-contact { font-size:0.9rem; color:var(--muted); line-height:1.8; }
+
+        /* ── CV PAGE ── */
+        .cv-container { max-width:900px; margin:0 auto; }
+        .cv-top { display:flex; align-items:center; justify-content:space-between; gap:2rem; margin-bottom:3rem; flex-wrap:wrap; }
+        .cv-top-info h2 { font-family:'Bebas Neue',cursive; font-size:2.8rem; color:white; letter-spacing:0.05em; }
+        .cv-top-info p { color:var(--muted); font-size:1rem; margin-top:0.3rem; }
+        .cv-action-btns { display:flex; gap:1rem; flex-wrap:wrap; }
+        .cv-preview { background:rgba(8,8,24,0.9); border-radius:1.2rem; border:1px solid rgba(0,245,255,0.12); overflow:hidden; }
+        .cv-preview-header { background:rgba(0,245,255,0.05); border-bottom:1px solid rgba(0,245,255,0.1); padding:1rem 1.5rem; display:flex; align-items:center; gap:0.8rem; }
+        .cv-dot { width:12px; height:12px; border-radius:50%; }
+        .cv-preview-title { font-size:0.85rem; color:var(--muted); margin-left:auto; }
+        .cv-iframe-wrap { width:100%; height:600px; background:#fff; }
+        .cv-iframe-wrap iframe { width:100%; height:100%; border:none; }
+        .cv-no-file { padding:5rem 2rem; text-align:center; }
+        .cv-no-file .cv-icon { font-size:4rem; margin-bottom:1.5rem; }
+        .cv-no-file h3 { font-family:'Bebas Neue',cursive; font-size:2rem; color:white; margin-bottom:0.8rem; }
+        .cv-no-file p { color:var(--muted); font-size:0.95rem; line-height:1.7; max-width:400px; margin:0 auto 2rem; }
+        .cv-steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin-top:2rem; text-align:left; }
+        .cv-step { background:rgba(0,245,255,0.04); border:1px solid rgba(0,245,255,0.12); border-radius:0.8rem; padding:1.2rem; }
+        .cv-step-num { font-family:'Bebas Neue',cursive; font-size:2rem; color:rgba(0,245,255,0.3); margin-bottom:0.4rem; }
+        .cv-step-text { font-size:0.88rem; color:var(--muted); line-height:1.6; }
+        .cv-step-text code { color:var(--cyan); background:rgba(0,245,255,0.08); padding:0.1rem 0.4rem; border-radius:3px; font-size:0.82rem; }
+
         ::-webkit-scrollbar { width:5px; }
         ::-webkit-scrollbar-track { background:var(--bg); }
         ::-webkit-scrollbar-thumb { background:rgba(0,245,255,0.3); border-radius:3px; }
-        @media(max-width:768px) { .container{padding:2rem 1.5rem;} .nav-links{gap:0.2rem;} .nav-btn{font-size:0.72rem;padding:0.4rem 0.6rem;} #cursor,#cursor-ring{display:none;} }
+        @media(max-width:768px) { .container{padding:2rem 1.5rem;} .nav-links{gap:0.2rem;} .nav-btn{font-size:0.72rem;padding:0.4rem 0.6rem;} #cursor,#cursor-ring{display:none;} .project-card-header,.project-card-body,.project-card-footer{padding-left:1.2rem;padding-right:1.2rem;} }
     </style>
 </head>
 <body>
@@ -110,10 +160,12 @@
                 <button class="nav-btn" onclick="showPage('projects')">Projects</button>
                 <button class="nav-btn" onclick="showPage('skills')">Skills</button>
                 <button class="nav-btn" onclick="showPage('contact')">Contact</button>
+                <button class="nav-btn" onclick="showPage('cv')" style="color:var(--cyan);border:1px solid rgba(0,245,255,0.3);border-radius:6px;">CV</button>
             </div>
-        </div>S
+        </div>
     </nav>
 
+    <!-- HOME -->
     <div id="home" class="page active">
         <div class="hero">
             <div class="profile-wrap">
@@ -124,8 +176,8 @@
             <h1>Avishka Vikum</h1>
             <div class="hero-roles">
                 <span class="role-pill">Full Stack Developer</span>
-                <span class="role-pill">MERN Stack </span>
-                <span class="role-pill">Wordpress </span>
+                <span class="role-pill">MERN Stack</span>
+                <span class="role-pill">Wordpress</span>
                 <span class="role-pill">AI/ML Enthusiast</span>
                 <span class="role-pill">DevOps Enthusiast</span>
             </div>
@@ -133,10 +185,13 @@
             <div class="hero-buttons">
                 <a href="https://github.com/Avishka137" target="_blank" class="btn-primary">🚀 View GitHub</a>
                 <a href="https://www.linkedin.com/in/avishka-vikum-5475b9277" target="_blank" class="btn-secondary">💼 LinkedIn</a>
+                <a href="#" class="btn-cv-view" onclick="showPage('cv');return false;">📄 View CV</a>
+                <a href="Avishka_Vikum_CV.pdf" download class="btn-cv-download">⬇ Download CV</a>
             </div>
         </div>
     </div>
 
+    <!-- ABOUT -->
     <div id="about" class="page">
         <div class="container">
             <h2 class="section-title">About Me</h2>
@@ -151,68 +206,179 @@
         </div>
     </div>
 
+    <!-- PROJECTS -->
     <div id="projects" class="page">
         <div class="container">
             <h2 class="section-title">Projects</h2>
             <div class="projects-grid">
+
                 <div class="project-card">
-                    <div class="project-header"><div class="project-title">Healthcare Management System</div><span class="badge badge-team">Team Project</span></div>
-                    <div class="project-meta">Jul 2025 – Oct 2025 | MERN Stack · Agile</div>
-                    <div class="project-desc">A centralized healthcare platform connecting patients and doctors for seamless online consultations, appointment scheduling, and medical record management.<br><br><strong>My Contribution:</strong> Built an AI-powered report generation feature using Gemini API to analyze patient data and deliver personalized healthcare recommendations.</div>
-                    <div class="tech-tags"><span class="tag">MongoDB</span><span class="tag">Express.js</span><span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">Stripe</span><span class="tag">Gemini API</span></div>
+                    <div class="project-number">01</div>
+                    <div class="project-card-header">
+                        <div class="project-header">
+                            <div class="project-title">Healthcare Management System</div>
+                            <span class="badge badge-team">Team Project</span>
+                        </div>
+                        <div class="project-meta">Jul 2025 – Oct 2025 · MERN Stack · Agile</div>
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-desc">A centralized healthcare platform connecting patients and doctors for seamless online consultations, appointment scheduling, and medical record management.</div>
+                        <div class="contribution-box">
+                            <div class="contribution-label">My Contribution</div>
+                            <div class="contribution-text">Built an AI-powered report generation feature using Gemini API to analyze patient data and deliver personalized healthcare recommendations.</div>
+                        </div>
+                    </div>
+                    <div class="project-card-footer">
+                        <div class="tech-tags"><span class="tag">MongoDB</span><span class="tag">Express.js</span><span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">Stripe</span><span class="tag">Gemini API</span></div>
+                    </div>
                 </div>
+
                 <div class="project-card">
-                    <div class="project-header"><div class="project-title">VikLib – Digital Library Platform</div><span class="badge badge-personal">Personal Project</span></div>
-                    <div class="project-meta">2025 | Full Stack · MERN</div>
-                    <div class="project-desc">Life is busy — but your reading shouldn't stop. VikLib is a feature-rich digital library platform for people on the go, allowing users to discover, borrow, and read their favorite books entirely from home. Browse an extensive catalog, manage a personal reading list, and pick up right where you left off across any device.</div>
-                    <div class="tech-tags"><span class="tag">MongoDB</span><span class="tag">Express.js</span><span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">JWT Auth</span><span class="tag">Tailwind CSS</span></div>
+                    <div class="project-number">02</div>
+                    <div class="project-card-header">
+                        <div class="project-header">
+                            <div class="project-title">VikLib – Digital Library Platform</div>
+                            <span class="badge badge-personal">Personal Project</span>
+                        </div>
+                        <div class="project-meta">2025 · Full Stack · MERN</div>
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-desc">Life is busy — but your reading shouldn't stop. VikLib is a feature-rich digital library platform for people on the go, allowing users to discover, borrow, and read their favorite books entirely from home. Browse an extensive catalog, manage a personal reading list, and pick up right where you left off across any device.</div>
+                    </div>
+                    <div class="project-card-footer">
+                        <div class="tech-tags"><span class="tag">MongoDB</span><span class="tag">Express.js</span><span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">JWT Auth</span><span class="tag">Tailwind CSS</span></div>
+                    </div>
                 </div>
+
                 <div class="project-card">
-                    <div class="project-header"><div class="project-title">Charity Management System – Web</div><span class="badge badge-team">Team · 5 Members</span></div>
-                    <div class="project-meta">Jul 2025 – Oct 2025 | MERN Stack · Agile</div>
-                    <div class="project-desc">A MERN stack-based donation platform connecting donors and beneficiaries for transparent charitable activities.<br><br><strong>My Contribution:</strong> Developed a workshop management module with scheduling, registration, and material tracking features.</div>
-                    <div class="tech-tags"><span class="tag">MongoDB</span><span class="tag">Express.js</span><span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">Tailwind CSS</span><span class="tag">JWT</span><span class="tag">Stripe</span></div>
+                    <div class="project-number">03</div>
+                    <div class="project-card-header">
+                        <div class="project-header">
+                            <div class="project-title">Charity Management System – Web</div>
+                            <span class="badge badge-team">Team · 5 Members</span>
+                        </div>
+                        <div class="project-meta">Jul 2025 – Oct 2025 · MERN Stack · Agile</div>
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-desc">A MERN stack-based donation platform connecting donors and beneficiaries for transparent charitable activities.</div>
+                        <div class="contribution-box">
+                            <div class="contribution-label">My Contribution</div>
+                            <div class="contribution-text">Developed a workshop management module with scheduling, registration, and material tracking features.</div>
+                        </div>
+                    </div>
+                    <div class="project-card-footer">
+                        <div class="tech-tags"><span class="tag">MongoDB</span><span class="tag">Express.js</span><span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">Tailwind CSS</span><span class="tag">JWT</span><span class="tag">Stripe</span></div>
+                    </div>
                 </div>
+
                 <div class="project-card">
-                    <div class="project-header"><div class="project-title">Goals for Goals – SDG Partnerships App</div><span class="badge badge-wip">In Progress</span></div>
-                    <div class="project-meta">2025 – Present | Team Project · MERN Stack · UN SDG API</div>
-                    <div class="project-desc">A collaborative platform for forming partnerships aligned with the UN Sustainable Development Goals.<br><br><strong>My Contribution:</strong> Engineered the SDG Management module — integrating the official UN SDG API to fetch and map all 17 SDGs and built partnership matching logic.</div>
-                    <div class="tech-tags"><span class="tag">MongoDB</span><span class="tag">Express.js</span><span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">UN SDG API</span><span class="tag">Tailwind CSS</span></div>
+                    <div class="project-number">04</div>
+                    <div class="project-card-header">
+                        <div class="project-header">
+                            <div class="project-title">Goals for Goals – SDG Partnerships App</div>
+                            <span class="badge badge-wip">In Progress</span>
+                        </div>
+                        <div class="project-meta">2025 – Present · Team Project · MERN Stack · UN SDG API</div>
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-desc">A collaborative platform for forming partnerships aligned with the UN Sustainable Development Goals.</div>
+                        <div class="contribution-box">
+                            <div class="contribution-label">My Contribution</div>
+                            <div class="contribution-text">Engineered the SDG Management module — integrating the official UN SDG API to fetch and map all 17 SDGs and built partnership matching logic.</div>
+                        </div>
+                    </div>
+                    <div class="project-card-footer">
+                        <div class="tech-tags"><span class="tag">MongoDB</span><span class="tag">Express.js</span><span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">UN SDG API</span><span class="tag">Tailwind CSS</span></div>
+                    </div>
                 </div>
+
                 <div class="project-card">
-                    <div class="project-header"><div class="project-title">Charity Management System – Mobile</div><span class="badge badge-team">Team Project</span></div>
-                    <div class="project-meta">Jul 2025 – Oct 2025 | React Native · Expo</div>
-                    <div class="project-desc">React Native companion to the charity platform enabling users to donate and access support on mobile devices.<br><br><strong>My Contribution:</strong> Developed the mobile workshop module with scheduling and registration using React Native, Expo, and Appwrite.</div>
-                    <div class="tech-tags"><span class="tag">React Native</span><span class="tag">Expo</span><span class="tag">NativeWind</span><span class="tag">Appwrite</span><span class="tag">Gemini API</span><span class="tag">Stripe</span></div>
+                    <div class="project-number">05</div>
+                    <div class="project-card-header">
+                        <div class="project-header">
+                            <div class="project-title">Charity Management System – Mobile</div>
+                            <span class="badge badge-team">Team Project</span>
+                        </div>
+                        <div class="project-meta">Jul 2025 – Oct 2025 · React Native · Expo</div>
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-desc">React Native companion to the charity platform enabling users to donate and access support on mobile devices.</div>
+                        <div class="contribution-box">
+                            <div class="contribution-label">My Contribution</div>
+                            <div class="contribution-text">Developed the mobile workshop module with scheduling and registration using React Native, Expo, and Appwrite.</div>
+                        </div>
+                    </div>
+                    <div class="project-card-footer">
+                        <div class="tech-tags"><span class="tag">React Native</span><span class="tag">Expo</span><span class="tag">NativeWind</span><span class="tag">Appwrite</span><span class="tag">Gemini API</span><span class="tag">Stripe</span></div>
+                    </div>
                 </div>
+
                 <div class="project-card">
-                    <div class="project-header"><div class="project-title">Fish Haven – Fish Farm Management</div><span class="badge badge-team">Team Project</span></div>
-                    <div class="project-meta">Jun 2025 – Aug 2025 | MERN Stack</div>
-                    <div class="project-desc">A management system for an ornamental fish export business handling delivery, employees, inventory, and export operations.<br><br><strong>My Contribution:</strong> Developed the Employee Management module with automated salary generation, attendance tracking, and payroll processing.</div>
-                    <div class="tech-tags"><span class="tag">MongoDB</span><span class="tag">Express.js</span><span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">JWT Authentication</span></div>
+                    <div class="project-number">06</div>
+                    <div class="project-card-header">
+                        <div class="project-header">
+                            <div class="project-title">Fish Haven – Fish Farm Management</div>
+                            <span class="badge badge-team">Team Project</span>
+                        </div>
+                        <div class="project-meta">Jun 2025 – Aug 2025 · MERN Stack</div>
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-desc">A management system for an ornamental fish export business handling delivery, employees, inventory, and export operations.</div>
+                        <div class="contribution-box">
+                            <div class="contribution-label">My Contribution</div>
+                            <div class="contribution-text">Developed the Employee Management module with automated salary generation, attendance tracking, and payroll processing.</div>
+                        </div>
+                    </div>
+                    <div class="project-card-footer">
+                        <div class="tech-tags"><span class="tag">MongoDB</span><span class="tag">Express.js</span><span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">JWT Authentication</span></div>
+                    </div>
                 </div>
+
                 <div class="project-card">
-                    <div class="project-header"><div class="project-title">AI Powered HR Chatbot</div><span class="badge badge-personal">Personal Project</span></div>
-                    <div class="project-meta">Nov 2025 – Dec 2025 | JavaScript · Gemini AI</div>
-                    <div class="project-desc">An intelligent HR assistant providing instant natural-language support for recruitment and hiring — helping candidates navigate job applications, interview stages, and company policies.</div>
-                    <div class="tech-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Google Gemini API</span></div>
+                    <div class="project-number">07</div>
+                    <div class="project-card-header">
+                        <div class="project-header">
+                            <div class="project-title">AI Powered HR Chatbot</div>
+                            <span class="badge badge-personal">Personal Project</span>
+                        </div>
+                        <div class="project-meta">Nov 2025 – Dec 2025 · JavaScript · Gemini AI</div>
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-desc">An intelligent HR assistant providing instant natural-language support for recruitment and hiring — helping candidates navigate job applications, interview stages, and company policies.</div>
+                    </div>
+                    <div class="project-card-footer">
+                        <div class="tech-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Google Gemini API</span></div>
+                    </div>
                 </div>
+
                 <div class="project-card">
-                    <div class="project-header"><div class="project-title">Kivy Chat Application</div><span class="badge badge-personal">Personal Project</span></div>
-                    <div class="project-meta">Dec 2025 | Python · Kivy</div>
-                    <div class="project-desc">A cross-platform desktop chat application with secure user authentication, real-time messaging, and profile management built using Python and Kivy.</div>
-                    <div class="tech-tags"><span class="tag">Python</span><span class="tag">Kivy</span><span class="tag">SQLite3</span></div>
+                    <div class="project-number">08</div>
+                    <div class="project-card-header">
+                        <div class="project-header">
+                            <div class="project-title">Kivy Chat Application</div>
+                            <span class="badge badge-personal">Personal Project</span>
+                        </div>
+                        <div class="project-meta">Dec 2025 · Python · Kivy · Flask-SocketIO</div>
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-desc">A cross-platform desktop and mobile chat application with secure user authentication, real-time messaging via WebSockets, admin panel, direct messaging, and profile management. Deployed web version on PythonAnywhere with a SocketIO backend on Railway.</div>
+                    </div>
+                    <div class="project-card-footer">
+                        <div class="tech-tags"><span class="tag">Python</span><span class="tag">Kivy</span><span class="tag">Flask</span><span class="tag">Flask-SocketIO</span><span class="tag">SQLite3</span><span class="tag">Railway</span></div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
 
+    <!-- SKILLS -->
     <div id="skills" class="page">
         <div class="container">
             <h2 class="section-title">Skills & Technologies</h2>
             <div class="skills-grid">
                 <div class="skill-cat"><h3>Programming Languages</h3><div class="skill-item">JavaScript</div><div class="skill-item">Python</div><div class="skill-item">Java</div><div class="skill-item">C / C++</div><div class="skill-item">HTML & CSS</div><div class="skill-item">PHP</div></div>
-                <div class="skill-cat"><h3>Frameworks & Libraries</h3><div class="skill-item">MERN Stack</div><div class="skill-item">React Native</div><div class="skill-item">Spring Boot</div><div class="skill-item">Tailwind CSS</div></div>
+                <div class="skill-cat"><h3>Frameworks & Libraries</h3><div class="skill-item">MERN Stack</div><div class="skill-item">React Native</div><div class="skill-item">Spring Boot</div><div class="skill-item">Tailwind CSS</div><div class="skill-item">Kivy</div></div>
                 <div class="skill-cat"><h3>Databases</h3><div class="skill-item">MongoDB</div><div class="skill-item">MySQL</div><div class="skill-item">ORDB SQL</div><div class="skill-item">SQLite3</div></div>
                 <div class="skill-cat"><h3>Tools & Platforms</h3><div class="skill-item">GitHub</div><div class="skill-item">WordPress</div><div class="skill-item">Jira</div><div class="skill-item">Postman</div><div class="skill-item">Appwrite</div><div class="skill-item">ClickUp</div><div class="skill-item">Confluence</div></div>
                 <div class="skill-cat"><h3>AI & APIs</h3><div class="skill-item">Google Gemini API</div><div class="skill-item">UN SDG API</div><div class="skill-item">Stripe Payments</div><div class="skill-item">REST API Design</div></div>
@@ -221,6 +387,7 @@
         </div>
     </div>
 
+    <!-- CONTACT -->
     <div id="contact" class="page">
         <div class="container">
             <h2 class="section-title">Contact Me</h2>
@@ -239,6 +406,44 @@
         </div>
     </div>
 
+    <!-- CV PAGE -->
+    <div id="cv" class="page">
+        <div class="container cv-container">
+            <div class="cv-top">
+                <div class="cv-top-info">
+                    <h2 class="section-title" style="text-align:left;margin-bottom:0.3rem;">My CV</h2>
+                    <p>Avishka Vikum — Software Engineering Undergraduate</p>
+                </div>
+                <div class="cv-action-btns">
+                    <a href="Avishka_Vikum_CV.pdf" target="_blank" class="btn-cv-view">📄 Open Full Screen</a>
+                    <a href="Avishka_Vikum_CV.pdf" download="Avishka_Vikum_CV.pdf" class="btn-cv-download">⬇ Download PDF</a>
+                </div>
+            </div>
+
+            <div class="cv-preview">
+                <div class="cv-preview-header">
+                    <div class="cv-dot" style="background:#ff5f57;"></div>
+                    <div class="cv-dot" style="background:#febc2e;"></div>
+                    <div class="cv-dot" style="background:#28c840;"></div>
+                    <span class="cv-preview-title">Avishka_Vikum_CV.pdf</span>
+                </div>
+                <div class="cv-iframe-wrap" id="cv-display">
+                    <div class="cv-no-file">
+                        <div class="cv-icon">📄</div>
+                        <h3>Add Your CV File</h3>
+                        <p>Place your CV file named <strong style="color:var(--cyan)">Avishka_Vikum_CV.pdf</strong> in the same folder as this HTML file and it will appear here automatically.</p>
+                        <div class="cv-steps">
+                            <div class="cv-step"><div class="cv-step-num">01</div><div class="cv-step-text">Export your CV as a PDF from Word, Google Docs, or Canva</div></div>
+                            <div class="cv-step"><div class="cv-step-num">02</div><div class="cv-step-text">Rename it to <code>Avishka_Vikum_CV.pdf</code></div></div>
+                            <div class="cv-step"><div class="cv-step-num">03</div><div class="cv-step-text">Place it in the same folder as <code>portfolio.html</code></div></div>
+                            <div class="cv-step"><div class="cv-step-num">04</div><div class="cv-step-text">Refresh the page — it will load in the viewer above</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         function showPage(id) {
             var pages = document.querySelectorAll('.page');
@@ -250,6 +455,22 @@
             }
             document.getElementById(id).classList.add('active');
             window.scrollTo(0, 0);
+
+            if (id === 'cv') {
+                var wrap = document.getElementById('cv-display');
+                if (!wrap.querySelector('iframe') && !wrap.querySelector('object')) {
+                    var obj = document.createElement('object');
+                    obj.data = 'Avishka_Vikum_CV.pdf';
+                    obj.type = 'application/pdf';
+                    obj.style.cssText = 'width:100%;height:600px;border:none;';
+                    var fallback = document.createElement('p');
+                    fallback.style.cssText = 'text-align:center;padding:2rem;color:#6e6e8a;';
+                    fallback.innerHTML = 'PDF cannot be displayed here. <a href="Avishka_Vikum_CV.pdf" target="_blank" style="color:#00f5ff;">Open in new tab</a>';
+                    obj.appendChild(fallback);
+                    wrap.innerHTML = '';
+                    wrap.appendChild(obj);
+                }
+            }
         }
 
         var cur = document.getElementById('cursor');
@@ -290,4 +511,3 @@
     </script>
 </body>
 </html>
-
