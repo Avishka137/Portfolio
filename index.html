@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Avishka Vikum - Software Engineer Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -20,6 +20,7 @@
         .loader-logo { font-family:'Bebas Neue',cursive; font-size:5rem; background:linear-gradient(135deg,var(--cyan),var(--purple)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:loaderPulse 0.8s ease infinite alternate; }
         .loader-bar { width:200px; height:2px; background:rgba(255,255,255,0.08); border-radius:2px; margin-top:2rem; overflow:hidden; }
         .loader-fill { height:100%; background:linear-gradient(90deg,var(--cyan),var(--purple)); border-radius:2px; animation:loaderFill 1.2s ease forwards; }
+        .loader-text { margin-top:1rem; font-size:0.75rem; color:var(--muted); letter-spacing:0.2em; text-transform:uppercase; }
         @keyframes loaderPulse { from{opacity:0.5;} to{opacity:1;} }
         @keyframes loaderFill { from{width:0%;} to{width:100%;} }
 
@@ -30,12 +31,16 @@
         #canvas-container { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
         body::before { content:''; position:fixed; inset:0; background-image:linear-gradient(rgba(0,245,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,255,0.02) 1px,transparent 1px); background-size:60px 60px; z-index:-1; pointer-events:none; }
 
+        /* ── FLOATING CONTACT BUTTON ── */
+        .float-contact { position:fixed; bottom:2rem; right:2rem; width:50px; height:50px; background:linear-gradient(135deg,var(--cyan),var(--purple)); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:998; box-shadow:0 0 20px rgba(0,245,255,0.4); transition:all 0.3s; border:none; color:#000; font-size:1.4rem; }
+        .float-contact:hover { transform:scale(1.1) rotate(5deg); box-shadow:0 0 30px rgba(0,245,255,0.7); }
+
         /* ── NAV ── */
         nav { position:fixed; top:0; width:100%; z-index:1000; background:rgba(4,4,15,0.9); backdrop-filter:blur(24px); border-bottom:1px solid var(--border); }
         .nav-container { max-width:1400px; margin:0 auto; padding:1.1rem 2.5rem; display:flex; justify-content:space-between; align-items:center; }
         .logo { font-family:'Bebas Neue',cursive; font-size:1.8rem; color:white; letter-spacing:0.05em; cursor:pointer; }
         .logo span { color:var(--cyan); }
-        .nav-links { display:flex; gap:0.5rem; }
+        .nav-links { display:flex; gap:0.5rem; flex-wrap:wrap; }
         .nav-btn { background:none; border:none; color:var(--muted); font-family:'Outfit',sans-serif; font-size:0.85rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; transition:all 0.3s; padding:0.5rem 1rem; border-radius:6px; }
         .nav-btn:hover { color:white; background:rgba(255,255,255,0.05); }
         .nav-btn.active { color:var(--cyan); background:rgba(0,245,255,0.08); }
@@ -71,7 +76,6 @@
         .hero h1 { font-family:'Bebas Neue',cursive; font-size:clamp(4rem,9vw,8rem); letter-spacing:0.06em; line-height:1; margin-bottom:1.5rem; background:linear-gradient(135deg,#fff 0%,var(--cyan) 40%,var(--purple) 70%,var(--pink) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; background-size:300% 300%; animation:shimmer 5s ease infinite; }
         @keyframes shimmer { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
 
-        /* ── TYPEWRITER ROLES ── */
         .hero-roles { display:flex; gap:0.6rem; flex-wrap:wrap; justify-content:center; margin-bottom:1.5rem; }
         .role-pill { font-size:0.78rem; font-weight:500; text-transform:uppercase; letter-spacing:0.08em; padding:0.35rem 0.9rem; border-radius:4px; }
         .role-pill:nth-child(1) { background:rgba(0,245,255,0.1); color:var(--cyan); border:1px solid rgba(0,245,255,0.2); }
@@ -85,13 +89,11 @@
         .hero p { font-size:1.05rem; color:var(--muted); max-width:50rem; margin:0 auto 2rem; line-height:1.9; }
         .hero-buttons { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:3rem; }
 
-        /* ── STAT COUNTERS ── */
         .hero-stats { display:flex; gap:2.5rem; justify-content:center; flex-wrap:wrap; padding:1.8rem 3rem; background:rgba(255,255,255,0.02); border:1px solid rgba(0,245,255,0.08); border-radius:1rem; backdrop-filter:blur(10px); }
         .stat-item { text-align:center; }
         .stat-num { font-family:'Bebas Neue',cursive; font-size:2.5rem; line-height:1; background:linear-gradient(135deg,var(--cyan),var(--purple)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
         .stat-label { font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin-top:0.2rem; }
 
-        /* ── BUTTONS ── */
         .btn-primary { padding:0.85rem 2.5rem; background:var(--cyan); border:none; border-radius:6px; font-weight:600; font-size:0.95rem; color:#000; cursor:pointer; transition:all 0.3s; text-decoration:none; display:inline-block; }
         .btn-primary:hover { transform:translateY(-3px); box-shadow:0 12px 35px rgba(0,245,255,0.35); }
         .btn-secondary { padding:0.85rem 2.5rem; background:transparent; border:1px solid rgba(191,90,242,0.5); border-radius:6px; font-weight:600; font-size:0.95rem; color:var(--purple); cursor:pointer; transition:all 0.3s; text-decoration:none; display:inline-block; }
@@ -101,13 +103,11 @@
         .btn-cv-download { padding:0.85rem 2rem; background:linear-gradient(135deg,var(--cyan),var(--purple)); border:none; border-radius:6px; font-weight:700; font-size:0.95rem; color:#000; cursor:pointer; transition:all 0.3s; text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; }
         .btn-cv-download:hover { transform:translateY(-3px); box-shadow:0 12px 35px rgba(0,245,255,0.3); opacity:0.9; }
 
-        /* ── CONTAINER ── */
         .container { max-width:78rem; margin:0 auto; background:rgba(8,8,24,0.8); backdrop-filter:blur(24px); border-radius:1.5rem; padding:4rem; border:1px solid var(--border); box-shadow:0 30px 80px rgba(0,0,0,0.5); }
         .section-title { font-family:'Bebas Neue',cursive; font-size:clamp(2.5rem,5vw,3.5rem); text-align:center; margin-bottom:3rem; background:linear-gradient(135deg,var(--cyan),var(--purple)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:0.05em; }
         .about-text { font-size:1.1rem; color:var(--muted); line-height:1.95; margin-bottom:1.5rem; }
         .sub-title { font-family:'Bebas Neue',cursive; font-size:2rem; color:var(--purple); margin:3rem 0 1.5rem; border-left:3px solid var(--purple); padding-left:1rem; letter-spacing:0.05em; }
 
-        /* ── EDUCATION TIMELINE ── */
         .timeline { position:relative; padding-left:2rem; }
         .timeline::before { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:linear-gradient(180deg,var(--cyan),var(--purple),transparent); border-radius:2px; }
         .edu-item { background:var(--card); border-radius:1rem; padding:1.8rem; margin-bottom:1.2rem; border:1px solid rgba(191,90,242,0.2); transition:all 0.3s; position:relative; }
@@ -117,7 +117,6 @@
         .edu-meta { font-size:0.95rem; color:var(--cyan); margin-bottom:0.4rem; }
         .edu-detail { font-size:0.95rem; color:var(--muted); }
 
-        /* ── PROJECTS ── */
         .filter-row { display:flex; gap:0.7rem; justify-content:center; flex-wrap:wrap; margin-bottom:2.5rem; }
         .filter-btn { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); color:var(--muted); font-family:'Outfit',sans-serif; font-size:0.82rem; font-weight:500; text-transform:uppercase; letter-spacing:0.08em; padding:0.45rem 1.2rem; border-radius:4px; cursor:pointer; transition:all 0.3s; }
         .filter-btn:hover { color:white; border-color:rgba(255,255,255,0.2); }
@@ -149,12 +148,12 @@
         .tag { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.09); padding:0.28rem 0.85rem; border-radius:4px; font-size:0.78rem; color:rgba(180,180,200,0.8); font-weight:500; transition:all 0.2s; }
         .tag:hover { background:rgba(0,245,255,0.08); border-color:rgba(0,245,255,0.2); color:var(--cyan); }
 
-        /* ── SKILLS WITH PROGRESS BARS ── */
         .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; }
-        .skill-cat { background:var(--card); border-radius:1rem; padding:2rem; border:1px solid rgba(0,245,255,0.1); transition:border-color 0.3s; }
-        .skill-cat:hover { border-color:rgba(0,245,255,0.25); }
+        .skill-cat { background:var(--card); border-radius:1rem; padding:2rem; border:1px solid rgba(0,245,255,0.1); transition:border-color 0.3s, transform 0.3s; }
+        .skill-cat:hover { border-color:rgba(0,245,255,0.25); transform:translateY(-5px); }
         .skill-cat h3 { font-family:'Bebas Neue',cursive; font-size:1.1rem; color:var(--cyan); letter-spacing:0.1em; margin-bottom:1.2rem; padding-bottom:0.8rem; border-bottom:1px solid rgba(0,245,255,0.1); }
-        .skill-item { font-size:0.95rem; color:var(--muted); padding:0.5rem 0; border-bottom:1px solid rgba(255,255,255,0.03); display:flex; align-items:center; gap:0.5rem; }
+        .skill-item { font-size:0.95rem; color:var(--muted); padding:0.5rem 0; border-bottom:1px solid rgba(255,255,255,0.03); display:flex; align-items:center; gap:0.5rem; transition:transform 0.2s; }
+        .skill-item:hover { transform:translateX(5px); color:var(--cyan); }
         .skill-item::before { content:'▸'; color:var(--cyan); font-size:0.7rem; opacity:0.6; }
         .skill-bar-item { padding:0.6rem 0; border-bottom:1px solid rgba(255,255,255,0.03); }
         .skill-bar-label { display:flex; justify-content:space-between; font-size:0.88rem; color:var(--text); margin-bottom:0.4rem; }
@@ -166,7 +165,6 @@
         .fill-pink { background:linear-gradient(90deg,var(--pink),rgba(255,45,120,0.5)); }
         .fill-gold { background:linear-gradient(90deg,var(--gold),rgba(255,214,10,0.5)); }
 
-        /* ── CONTACT ── */
         .contact-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; margin-bottom:3rem; }
         .contact-card { background:var(--card); border-radius:1rem; padding:1.8rem; border:1px solid rgba(0,245,255,0.1); display:flex; gap:1.2rem; align-items:flex-start; transition:all 0.3s; }
         .contact-card:hover { border-color:rgba(0,245,255,0.3); transform:translateY(-3px); }
@@ -181,7 +179,6 @@
         .ref-role { font-size:0.9rem; color:var(--purple); margin-bottom:0.8rem; }
         .ref-contact { font-size:0.9rem; color:var(--muted); line-height:1.8; }
 
-        /* ── CV PAGE ── */
         .cv-container { max-width:900px; margin:0 auto; }
         .cv-top { display:flex; align-items:center; justify-content:space-between; gap:2rem; margin-bottom:3rem; flex-wrap:wrap; }
         .cv-top-info h2 { font-family:'Bebas Neue',cursive; font-size:2.8rem; color:white; letter-spacing:0.05em; }
@@ -203,13 +200,11 @@
         .cv-step-text { font-size:0.88rem; color:var(--muted); line-height:1.6; }
         .cv-step-text code { color:var(--cyan); background:rgba(0,245,255,0.08); padding:0.1rem 0.4rem; border-radius:3px; font-size:0.82rem; }
 
-        /* ── BACK TO TOP ── */
-        #back-top { position:fixed; bottom:2rem; right:2rem; width:44px; height:44px; background:rgba(0,245,255,0.1); border:1px solid rgba(0,245,255,0.3); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:999; opacity:0; transition:all 0.3s; font-size:1.1rem; color:var(--cyan); }
+        #back-top { position:fixed; bottom:2rem; left:2rem; width:44px; height:44px; background:rgba(0,245,255,0.1); border:1px solid rgba(0,245,255,0.3); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:999; opacity:0; transition:all 0.3s; font-size:1.1rem; color:var(--cyan); }
         #back-top.visible { opacity:1; }
         #back-top:hover { background:rgba(0,245,255,0.2); transform:translateY(-3px); }
 
-        /* ── FOOTER ── */
-        footer { text-align:center; padding:3rem 2rem; background:rgba(4,4,15,0.95); border-top:1px solid var(--border); }
+        footer { text-align:center; padding:3rem 2rem; background:rgba(4,4,15,0.95); border-top:1px solid var(--border); margin-top:2rem; }
         .footer-logo { font-family:'Bebas Neue',cursive; font-size:2rem; color:white; margin-bottom:0.5rem; }
         .footer-logo span { color:var(--cyan); }
         .footer-links { display:flex; gap:1.5rem; justify-content:center; margin:1rem 0; flex-wrap:wrap; }
@@ -217,22 +212,22 @@
         .footer-links a:hover { color:var(--cyan); }
         .footer-copy { font-size:0.8rem; color:var(--muted); opacity:0.5; }
 
-        /* ── SCROLLBAR ── */
         ::-webkit-scrollbar { width:5px; }
         ::-webkit-scrollbar-track { background:var(--bg); }
         ::-webkit-scrollbar-thumb { background:rgba(0,245,255,0.3); border-radius:3px; }
 
-        /* ── MOBILE ── */
         @media(max-width:768px) {
             .container{padding:2rem 1.5rem;}
             .nav-links{gap:0.2rem;}
-            .nav-btn{font-size:0.72rem;padding:0.4rem 0.6rem;}
+            .nav-btn{font-size:0.7rem;padding:0.4rem 0.6rem;}
             #cursor,#cursor-ring{display:none;}
             .project-card-header,.project-card-body,.project-card-footer{padding-left:1.2rem;padding-right:1.2rem;}
             .hero-stats{gap:1.5rem;padding:1.2rem 1.5rem;}
             .stat-num{font-size:2rem;}
             .hero h1{font-size:clamp(3rem,12vw,5rem);}
             .timeline{padding-left:1.5rem;}
+            .float-contact { width:40px; height:40px; font-size:1rem; bottom:1rem; right:1rem; }
+            #back-top { bottom:1rem; left:1rem; width:36px; height:36px; font-size:0.9rem; }
         }
     </style>
 </head>
@@ -242,12 +237,17 @@
     <div id="loader">
         <div class="loader-logo">AV</div>
         <div class="loader-bar"><div class="loader-fill"></div></div>
+        <div class="loader-text">EXPERIENCE • INNOVATION • CODE</div>
     </div>
 
     <div id="scroll-progress"></div>
     <div id="cursor"></div>
     <div id="cursor-ring"></div>
     <div id="canvas-container"></div>
+    
+    <!-- FLOATING CONTACT BUTTON -->
+    <button class="float-contact" onclick="showPage('contact')" aria-label="Contact">✉️</button>
+    
     <div id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
 
     <nav>
@@ -270,7 +270,7 @@
             <div class="profile-wrap">
                 <div class="orbit"><div class="orbit-dot"></div></div>
                 <div class="orbit2"><div class="orbit2-dot"></div></div>
-                <img src="vikum.png" alt="Avishka Vikum" class="profile-photo">
+                <img src="vikum.png" alt="Avishka Vikum" class="profile-photo" onerror="this.src='https://via.placeholder.com/220x220?text=AV'">
             </div>
             <div class="status-badge"><span class="status-dot"></span> Available for Working</div>
             <h1>Avishka Vikum</h1>
@@ -684,7 +684,7 @@
     </div>
 
     <!-- FOOTER -->
-    <footer id="site-footer" style="display:none">
+    <footer>
         <div class="footer-logo">A<span>V</span></div>
         <div class="footer-links">
             <a href="https://github.com/Avishka137" target="_blank">GitHub</a>
@@ -722,12 +722,11 @@
             document.getElementById(id).classList.add('active');
             window.scrollTo(0, 0);
 
-            var footer = document.getElementById('site-footer');
-            footer.style.display = (id === 'home') ? 'none' : 'block';
-
+            /* Footer now always visible */
+            
             if (id === 'cv') {
                 var wrap = document.getElementById('cv-display');
-                if (!wrap.querySelector('iframe') && !wrap.querySelector('object')) {
+                if (wrap && !wrap.querySelector('iframe') && !wrap.querySelector('object')) {
                     var obj = document.createElement('object');
                     obj.data = 'Avishka_Vikum_CV.pdf';
                     obj.type = 'application/pdf';
@@ -741,14 +740,10 @@
                 }
             }
 
-            /* Trigger reveals after page switch */
             setTimeout(triggerReveal, 100);
-
-            /* Animate skill bars when skills page opens */
             if (id === 'skills') setTimeout(animateSkillBars, 400);
         }
 
-        /* ── SCROLL REVEAL ── */
         function triggerReveal() {
             document.querySelectorAll('.reveal, .reveal-left').forEach(function(el) {
                 var rect = el.getBoundingClientRect();
@@ -758,14 +753,12 @@
         window.addEventListener('scroll', triggerReveal);
         triggerReveal();
 
-        /* ── SKILL BARS ── */
         function animateSkillBars() {
             document.querySelectorAll('.skill-bar-fill').forEach(function(bar) {
                 bar.style.width = bar.getAttribute('data-width') + '%';
             });
         }
 
-        /* ── PROJECT FILTER ── */
         function filterProjects(type, btn) {
             document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
             btn.classList.add('active');
@@ -778,7 +771,6 @@
             });
         }
 
-        /* ── COUNTER ANIMATION ── */
         function animateCounters() {
             document.querySelectorAll('.stat-num[data-target]').forEach(function(el) {
                 var target = parseInt(el.getAttribute('data-target'));
@@ -787,13 +779,13 @@
                 var timer = setInterval(function() {
                     current += step;
                     if (current >= target) { current = target; clearInterval(timer); }
-                    el.textContent = Math.floor(current) + (target >= 10 ? '+' : '+');
+                    el.textContent = Math.floor(current) + (target >= 10 ? '+' : '');
                 }, 40);
             });
         }
         setTimeout(animateCounters, 1600);
 
-        /* ── TYPEWRITER ── */
+        /* ── TYPEWRITER (SMOOTHED) ── */
         var roles = ['Full Stack Developer', 'MERN Stack Engineer', 'AI/ML Enthusiast', 'React Native Developer', 'DevOps Enthusiast'];
         var roleIdx = 0, charIdx = 0, deleting = false;
         function typeWriter() {
@@ -803,15 +795,15 @@
             if (!deleting) {
                 el.textContent = current.slice(0, charIdx + 1);
                 charIdx++;
-                if (charIdx === current.length) { deleting = true; setTimeout(typeWriter, 1800); return; }
+                if (charIdx === current.length) { deleting = true; setTimeout(typeWriter, 2000); return; }
             } else {
                 el.textContent = current.slice(0, charIdx - 1);
                 charIdx--;
-                if (charIdx === 0) { deleting = false; roleIdx = (roleIdx + 1) % roles.length; setTimeout(typeWriter, 400); return; }
+                if (charIdx === 0) { deleting = false; roleIdx = (roleIdx + 1) % roles.length; setTimeout(typeWriter, 500); return; }
             }
-            setTimeout(typeWriter, deleting ? 55 : 85);
+            setTimeout(typeWriter, deleting ? 50 : 80);
         }
-        setTimeout(typeWriter, 1800);
+        setTimeout(typeWriter, 1500);
 
         /* ── CURSOR ── */
         var cur = document.getElementById('cursor');
@@ -819,13 +811,13 @@
         var cx = 0, cy = 0, rx = 0, ry = 0;
         document.addEventListener('mousemove', function(e) {
             cx = e.clientX; cy = e.clientY;
-            cur.style.transform = 'translate(' + (cx - 8) + 'px,' + (cy - 8) + 'px)';
+            if(cur) cur.style.transform = 'translate(' + (cx - 8) + 'px,' + (cy - 8) + 'px)';
         });
-        document.addEventListener('mousedown', function() { cur.classList.add('expanded'); });
-        document.addEventListener('mouseup', function() { cur.classList.remove('expanded'); });
+        document.addEventListener('mousedown', function() { if(cur) cur.classList.add('expanded'); });
+        document.addEventListener('mouseup', function() { if(cur) cur.classList.remove('expanded'); });
         function moveRing() {
             rx += (cx - rx) * 0.12; ry += (cy - ry) * 0.12;
-            ring.style.transform = 'translate(' + (rx - 22) + 'px,' + (ry - 22) + 'px)';
+            if(ring) ring.style.transform = 'translate(' + (rx - 22) + 'px,' + (ry - 22) + 'px)';
             requestAnimationFrame(moveRing);
         }
         moveRing();
@@ -837,7 +829,8 @@
         var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        document.getElementById('canvas-container').appendChild(renderer.domElement);
+        var container = document.getElementById('canvas-container');
+        if(container) container.appendChild(renderer.domElement);
 
         var geo = new THREE.BufferGeometry();
         var count = 2500, pos = new Float32Array(count * 3), col = new Float32Array(count * 3);
@@ -862,13 +855,13 @@
             mouseY = (e.clientY / window.innerHeight - 0.5) * 0.5;
         });
 
-        function animate() {
-            requestAnimationFrame(animate);
+        function animateParticles() {
+            requestAnimationFrame(animateParticles);
             points.rotation.y += 0.0005 + mouseX * 0.001;
             points.rotation.x += 0.0002 + mouseY * 0.001;
             renderer.render(scene, camera);
         }
-        animate();
+        animateParticles();
 
         window.addEventListener('resize', function() {
             camera.aspect = window.innerWidth / window.innerHeight;
